@@ -82,7 +82,11 @@ test('element exists', async () => {
 ```
 
 ::: warning
+<<<<<<< HEAD
 `expect.poll` 使每个断言都异步，所以不要忘记等待它，否则可能会收到未经处理的 promise 拒绝。
+=======
+`expect.poll` makes every assertion asynchronous, so you need to await it. Since Vitest 2.2, if you forget to await it, the test will fail with a warning to do so.
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 
 `expect.poll` 不适用于多个匹配器：
 
@@ -729,6 +733,398 @@ test('matches snapshot', () => {
 })
 ```
 
+<<<<<<< HEAD
+=======
+## toMatchInlineSnapshot
+
+- **Type:** `<T>(shape?: Partial<T> | string, snapshot?: string, message?: string) => void`
+
+This ensures that a value matches the most recent snapshot.
+
+Vitest adds and updates the inlineSnapshot string argument to the matcher in the test file (instead of an external `.snap` file).
+
+```ts
+import { expect, test } from 'vitest'
+
+test('matches inline snapshot', () => {
+  const data = { foo: new Set(['bar', 'snapshot']) }
+  // Vitest will update following content when updating the snapshot
+  expect(data).toMatchInlineSnapshot(`
+    {
+      "foo": Set {
+        "bar",
+        "snapshot",
+      },
+    }
+  `)
+})
+```
+
+You can also provide a shape of an object, if you are testing just a shape of an object, and don't need it to be 100% compatible:
+
+```ts
+import { expect, test } from 'vitest'
+
+test('matches snapshot', () => {
+  const data = { foo: new Set(['bar', 'snapshot']) }
+  expect(data).toMatchInlineSnapshot(
+    { foo: expect.any(Set) },
+    `
+    {
+      "foo": Any<Set>,
+    }
+  `
+  )
+})
+```
+
+## toMatchFileSnapshot {#tomatchfilesnapshot}
+
+- **Type:** `<T>(filepath: string, message?: string) => Promise<void>`
+
+Compare or update the snapshot with the content of a file explicitly specified (instead of the `.snap` file).
+
+```ts
+import { expect, it } from 'vitest'
+
+it('render basic', async () => {
+  const result = renderHTML(h('div', { class: 'foo' }))
+  await expect(result).toMatchFileSnapshot('./test/basic.output.html')
+})
+```
+
+Note that since file system operation is async, you need to use `await` with `toMatchFileSnapshot()`. If `await` is not used, Vitest treats it like `expect.soft`, meaning the code after the statement will continue to run even if the snapshot mismatches. After the test finishes, Vitest will check the snapshot and fail if there is a mismatch.
+
+## toThrowErrorMatchingSnapshot
+
+- **Type:** `(message?: string) => void`
+
+The same as [`toMatchSnapshot`](#tomatchsnapshot), but expects the same value as [`toThrowError`](#tothrowerror).
+
+## toThrowErrorMatchingInlineSnapshot
+
+- **Type:** `(snapshot?: string, message?: string) => void`
+
+The same as [`toMatchInlineSnapshot`](#tomatchinlinesnapshot), but expects the same value as [`toThrowError`](#tothrowerror).
+
+## toHaveBeenCalled
+
+- **Type:** `() => Awaitable<void>`
+
+This assertion is useful for testing that a function has been called. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('spy function', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  expect(buySpy).not.toHaveBeenCalled()
+
+  market.buy('apples', 10)
+
+  expect(buySpy).toHaveBeenCalled()
+})
+```
+
+## toHaveBeenCalledTimes
+
+- **Type**: `(amount: number) => Awaitable<void>`
+
+This assertion checks if a function was called a certain amount of times. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('spy function called two times', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  market.buy('apples', 10)
+  market.buy('apples', 20)
+
+  expect(buySpy).toHaveBeenCalledTimes(2)
+})
+```
+
+## toHaveBeenCalledWith
+
+- **Type**: `(...args: any[]) => Awaitable<void>`
+
+This assertion checks if a function was called at least once with certain parameters. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('spy function', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  market.buy('apples', 10)
+  market.buy('apples', 20)
+
+  expect(buySpy).toHaveBeenCalledWith('apples', 10)
+  expect(buySpy).toHaveBeenCalledWith('apples', 20)
+})
+```
+
+## toHaveBeenCalledBefore <Version>2.2.0</Version> {#tohavebeencalledbefore}
+
+- **Type**: `(mock: MockInstance, failIfNoFirstInvocation?: boolean) => Awaitable<void>`
+
+This assertion checks if a `Mock` was called before another `Mock`.
+
+```ts
+test('calls mock1 before mock2', () => {
+  const mock1 = vi.fn()
+  const mock2 = vi.fn()
+
+  mock1()
+  mock2()
+  mock1()
+
+  expect(mock1).toHaveBeenCalledBefore(mock2)
+})
+```
+
+## toHaveBeenCalledAfter <Version>2.2.0</Version> {#tohavebeencalledafter}
+
+- **Type**: `(mock: MockInstance, failIfNoFirstInvocation?: boolean) => Awaitable<void>`
+
+This assertion checks if a `Mock` was called after another `Mock`.
+
+```ts
+test('calls mock1 after mock2', () => {
+  const mock1 = vi.fn()
+  const mock2 = vi.fn()
+
+  mock2()
+  mock1()
+  mock2()
+
+  expect(mock1).toHaveBeenCalledAfter(mock2)
+})
+```
+
+## toHaveBeenCalledExactlyOnceWith <Version>2.2.0</Version> {#tohavebeencalledexactlyoncewith}
+
+- **Type**: `(...args: any[]) => Awaitable<void>`
+
+This assertion checks if a function was called exactly once and with certain parameters. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('spy function', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  market.buy('apples', 10)
+
+  expect(buySpy).toHaveBeenCalledExactlyOnceWith('apples', 10)
+})
+```
+
+## toHaveBeenLastCalledWith
+
+- **Type**: `(...args: any[]) => Awaitable<void>`
+
+This assertion checks if a function was called with certain parameters at its last invocation. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('spy function', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  market.buy('apples', 10)
+  market.buy('apples', 20)
+
+  expect(buySpy).not.toHaveBeenLastCalledWith('apples', 10)
+  expect(buySpy).toHaveBeenLastCalledWith('apples', 20)
+})
+```
+
+## toHaveBeenNthCalledWith
+
+- **Type**: `(time: number, ...args: any[]) => Awaitable<void>`
+
+This assertion checks if a function was called with certain parameters at the certain time. The count starts at 1. So, to check the second entry, you would write `.toHaveBeenNthCalledWith(2, ...)`.
+
+Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+const market = {
+  buy(subject: string, amount: number) {
+    // ...
+  },
+}
+
+test('first call of spy function called with right params', () => {
+  const buySpy = vi.spyOn(market, 'buy')
+
+  market.buy('apples', 10)
+  market.buy('apples', 20)
+
+  expect(buySpy).toHaveBeenNthCalledWith(1, 'apples', 10)
+})
+```
+
+## toHaveReturned
+
+- **Type**: `() => Awaitable<void>`
+
+This assertion checks if a function has successfully returned a value at least once (i.e., did not throw an error). Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+function getApplesPrice(amount: number) {
+  const PRICE = 10
+  return amount * PRICE
+}
+
+test('spy function returned a value', () => {
+  const getPriceSpy = vi.fn(getApplesPrice)
+
+  const price = getPriceSpy(10)
+
+  expect(price).toBe(100)
+  expect(getPriceSpy).toHaveReturned()
+})
+```
+
+## toHaveReturnedTimes
+
+- **Type**: `(amount: number) => Awaitable<void>`
+
+This assertion checks if a function has successfully returned a value an exact amount of times (i.e., did not throw an error). Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+test('spy function returns a value two times', () => {
+  const sell = vi.fn((product: string) => ({ product }))
+
+  sell('apples')
+  sell('bananas')
+
+  expect(sell).toHaveReturnedTimes(2)
+})
+```
+
+## toHaveReturnedWith
+
+- **Type**: `(returnValue: any) => Awaitable<void>`
+
+You can call this assertion to check if a function has successfully returned a value with certain parameters at least once. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+test('spy function returns a product', () => {
+  const sell = vi.fn((product: string) => ({ product }))
+
+  sell('apples')
+
+  expect(sell).toHaveReturnedWith({ product: 'apples' })
+})
+```
+
+## toHaveLastReturnedWith
+
+- **Type**: `(returnValue: any) => Awaitable<void>`
+
+You can call this assertion to check if a function has successfully returned a certain value when it was last invoked. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+test('spy function returns bananas on a last call', () => {
+  const sell = vi.fn((product: string) => ({ product }))
+
+  sell('apples')
+  sell('bananas')
+
+  expect(sell).toHaveLastReturnedWith({ product: 'bananas' })
+})
+```
+
+## toHaveNthReturnedWith
+
+- **Type**: `(time: number, returnValue: any) => Awaitable<void>`
+
+You can call this assertion to check if a function has successfully returned a value with certain parameters on a certain call. Requires a spy function to be passed to `expect`.
+
+```ts
+import { expect, test, vi } from 'vitest'
+
+test('spy function returns bananas on second call', () => {
+  const sell = vi.fn((product: string) => ({ product }))
+
+  sell('apples')
+  sell('bananas')
+
+  expect(sell).toHaveNthReturnedWith(2, { product: 'bananas' })
+})
+```
+
+## toHaveResolved
+
+- **Type**: `() => Awaitable<void>`
+
+This assertion checks if a function has successfully resolved a value at least once (i.e., did not reject). Requires a spy function to be passed to `expect`.
+
+If the function returned a promise, but it was not resolved yet, this will fail.
+
+```ts
+import { expect, test, vi } from 'vitest'
+import db from './db/apples.js'
+
+async function getApplesPrice(amount: number) {
+  return amount * await db.get('price')
+}
+
+test('spy function resolved a value', async () => {
+  const getPriceSpy = vi.fn(getApplesPrice)
+
+  const price = await getPriceSpy(10)
+
+  expect(price).toBe(100)
+  expect(getPriceSpy).toHaveResolved()
+})
+```
+
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 ## toHaveResolvedTimes
 
 - **类型**: `(amount: number) => Awaitable<void>`
@@ -859,7 +1255,13 @@ test('buyApples returns new stock id', async () => {
 ```
 
 :::warning
+<<<<<<< HEAD
 如果断言没有被等待，那么将得到一个虚假的测试，它将每次都通过。为了确保断言实际上被调用，需要使用 [`expect.assertions(number)`](#expect-assertions)。
+=======
+If the assertion is not awaited, then you will have a false-positive test that will pass every time. To make sure that assertions are actually called, you may use [`expect.assertions(number)`](#expect-assertions).
+
+Since Vitest 2.2, if a method is not awaited, Vitest will show a warning at the end of the test. In Vitest 3, the test will be marked as "failed" if the assertion is not awaited.
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 :::
 
 ## rejects
@@ -888,7 +1290,13 @@ test('buyApples throws an error when no id provided', async () => {
 ```
 
 :::warning
+<<<<<<< HEAD
 如果不等待断言，那么将得到每次都会通过的误报测试。 为了确保确实调用了断言，可以使用 [`expect.assertions(number)`](#expect-assertions)。
+=======
+If the assertion is not awaited, then you will have a false-positive test that will pass every time. To make sure that assertions were actually called, you can use [`expect.assertions(number)`](#expect-assertions).
+
+Since Vitest 2.2, if a method is not awaited, Vitest will show a warning at the end of the test. In Vitest 3, the test will be marked as "failed" if the assertion is not awaited.
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 :::
 
 ## expect.assertions

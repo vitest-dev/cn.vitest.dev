@@ -278,9 +278,13 @@ export default defineConfig({
 
 输出的 XML 包含嵌套的 `testsuites` 和 `testcase` 标记。你可以使用环境变量 `VITEST_JUNIT_SUITE_NAME` 和 `VITEST_JUNIT_CLASSNAME` 分别配置它们的名称和类名属性。
 
+<<<<<<< HEAD
 ### JSON 报告器
 
 以 JSON 格式输出测试结果报告。既可打印到终端，也可使用 [`outputFile`](##报告器输出) 配置选项写入文件。
+=======
+Generates a report of the test results in a JSON format compatible with Jest's `--json` option. Can either be printed to the terminal or written to a file using the [`outputFile`](/config/#outputfile) configuration option.
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 
 :::code-group
 
@@ -336,11 +340,20 @@ JSON 报告示例:
       "message": "",
       "name": "/root-directory/__tests__/test-file-1.test.ts"
     }
-  ]
+  ],
+  "coverageMap": {}
 }
 ```
 
+<<<<<<< HEAD
 ### HTML 报告器
+=======
+::: info
+Since Vitest 2.2, the JSON reporter includes coverage information in `coverageMap` if coverage is enabled.
+:::
+
+### HTML Reporter
+>>>>>>> d36535e99d00affa4604e4239eb8e8c88f61821a
 
 生成 HTML 文件，通过交互式 [GUI](/guide/ui) 查看测试结果。文件生成后，Vitest 将保持本地开发服务器运行，并提供一个链接，以便在浏览器中查看报告。
 
