@@ -1185,6 +1185,18 @@ inject('wsPort') === 3000
 
 :::
 
+Since Vitest 2.2.0, you can define a custom callback function to be called when Vitest reruns tests. If the function is asynchronous, the runner will wait for it to complete before executing the tests.
+
+```ts
+import type { GlobalSetupContext } from 'vitest/node'
+
+export default function setup({ onTestsRerun }: GlobalSetupContext) {
+  onTestsRerun(async () => {
+    await restartDb()
+  })
+}
+```
+
 ### forceRerunTriggers<NonProjectOption />
 
 - **类型**: `string[]`
@@ -2007,8 +2019,13 @@ export default defineConfig({
 
 ### resolveSnapshotPath<NonProjectOption />
 
+<<<<<<< HEAD
 - **类型**: `(testPath: string, snapExtension: string) => string`
 - **默认值**: 存储快照文件在 `__snapshots__` 目录
+=======
+- **Type**: `(testPath: string, snapExtension: string, context: { config: SerializedConfig }) => string`
+- **Default**: stores snapshot files in `__snapshots__` directory
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 覆盖快照的默认路径。例如，要在测试文件旁边存储一下快照：
 
@@ -2407,6 +2424,7 @@ export default defineConfig({
 
 ### diff
 
+<<<<<<< HEAD
 - **类型:** `string`
 - **命令行终端:** `--diff=<value>`
 
@@ -2417,14 +2435,35 @@ export default defineConfig({
 ```ts [vitest.diff.ts]
 import type { DiffOptions } from 'vitest'
 import c from 'tinyrainbow'
+=======
+- **Type:** `string`
+- **CLI:** `--diff=<path>`
 
-export default {
-  aIndicator: c.bold('--'),
-  bIndicator: c.bold('++'),
-  omitAnnotationLines: true,
-} satisfies DiffOptions
+`DiffOptions` object or a path to a module which exports `DiffOptions`. Useful if you want to customize diff display.
+
+For example, as a config object:
+
+:::code-group
+```ts [vitest.config.js]
+import { defineConfig } from 'vitest/config'
+import c from 'picocolors'
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+
+export default defineConfig({
+  test: {
+    diff: {
+      aIndicator: c.bold('--'),
+      bIndicator: c.bold('++'),
+      omitAnnotationLines: true,
+    }
+  }
+})
 ```
+:::
 
+Or as a module:
+
+:::code-group
 ```ts [vitest.config.js]
 import { defineConfig } from 'vitest/config'
 
@@ -2435,20 +2474,53 @@ export default defineConfig({
 })
 ```
 
+<<<<<<< HEAD
+=======
+```ts [vitest.diff.ts]
+import type { DiffOptions } from 'vitest'
+import c from 'picocolors'
+
+export default {
+  aIndicator: c.bold('--'),
+  bIndicator: c.bold('++'),
+  omitAnnotationLines: true,
+} satisfies DiffOptions
+```
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 :::
+
+#### diff.expand
+
+- **Type**: `boolean`
+- **Default**: `true`
+- **CLI:** `--diff.expand=false`
+
+Expand all common lines.
 
 #### diff.truncateThreshold
 
+<<<<<<< HEAD
 - **类型**: `number`
 - **默认值**: `0`
+=======
+- **Type**: `number`
+- **Default**: `0`
+- **CLI:** `--diff.truncateThreshold=<path>`
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 要显示的差异结果的最大长度。超过此阈值的差异将被截断。
 默认值为 0 时，截断不会生效。
 
 #### diff.truncateAnnotation
 
+<<<<<<< HEAD
 - **类型**: `string`
 - **默认值**: `'... Diff result is truncated'`
+=======
+- **Type**: `string`
+- **Default**: `'... Diff result is truncated'`
+- **CLI:** `--diff.truncateAnnotation=<annotation>`
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 在 diff 结果末尾输出的注释（如果被截断）。
 
@@ -2458,6 +2530,13 @@ export default defineConfig({
 - **默认值**: `noColor = (string: string): string => string`
 
 截断注释的颜色，默认为无色输出。
+
+#### diff.printBasicPrototype
+
+- **Type**: `boolean`
+- **Default**: `true`
+
+Print basic prototype `Object` and `Array` in diff output
 
 ### fakeTimers
 

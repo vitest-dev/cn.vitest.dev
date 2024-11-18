@@ -38,10 +38,11 @@ export default defineConfig({
 在 `pool` 选项中指定的文件应该导出一个函数（可以是异步的），该函数接受 `Vitest` 接口作为其第一个选项。这个函数需要返回一个与 `ProcessPool` 接口匹配的对象：
 
 ```ts
-import { ProcessPool, WorkspaceProject } from 'vitest/node'
+import { ProcessPool, TestSpecification } from 'vitest/node'
 
 export interface ProcessPool {
   name: string
+<<<<<<< HEAD
   runTests: (
     files: [project: WorkspaceProject, testFile: string][],
     invalidates?: string[]
@@ -50,6 +51,10 @@ export interface ProcessPool {
     files: [project: WorkspaceProject, testFile: string][],
     invalidates?: string[]
   ) => Promise<void>
+=======
+  runTests: (files: TestSpecification[], invalidates?: string[]) => Promise<void>
+  collectTests: (files: TestSpecification[], invalidates?: string[]) => Promise<void>
+>>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
   close?: () => Promise<void>
 }
 ```
