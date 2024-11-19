@@ -752,7 +752,11 @@ VM forks pool 的内存限制。如果你观察到内存泄漏问题，可以尝
 - **CLI:** `--project <name>`
 - **Config:** [project](/config/#project)
 
+<<<<<<< HEAD
 如果使用 Vitest 工作区功能，则为要运行的项目名称。多个项目可重复此操作： `project=1--project=2`。也可以使用通配符过滤项目，如 `--project=packages*` 。
+=======
+The name of the project to run if you are using Vitest workspace feature. This can be repeated for multiple projects: `--project=1 --project=2`. You can also filter projects using wildcards like `--project=packages*`, and exclude projects with `--project=!pattern`.
+>>>>>>> a3d5ec1a9c68302fc48da99589891ca4491e4d1f
 
 ### slowTestThreshold
 

@@ -257,9 +257,9 @@ test('mock return value with only partially correct typing', async () => {
 
 ```ts
 vi.mock('./example.js', async () => {
-  const axios = await vi.importActual('./example.js')
+  const originalModule = await vi.importActual('./example.js')
 
-  return { ...axios, get: vi.fn() }
+  return { ...originalModule, get: vi.fn() }
 })
 ```
 
