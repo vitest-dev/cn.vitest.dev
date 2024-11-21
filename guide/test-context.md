@@ -72,7 +72,6 @@ Vitest 提供了两种不同的方式来帮助你扩展测试上下文。
 
 与 [Playwright](https://playwright.dev/docs/api/class-test#test-extend) 一样，你可以使用此方法通过自定义装置定义你自己的 `test` API，并在任何地方重复使用它。
 
-
 例如，我们首先使用两个固定装置创建 `myTest`，`todos` 和 `archive`。
 
 ```ts
@@ -83,7 +82,7 @@ const todos = []
 const archive = []
 
 export const myTest = test.extend({
-  // eslint-disable-next-line no-empty-pattern
+
   todos: async ({}, use) => {
     // 在每次测试函数运行之前设置固定装置
     todos.push(1, 2, 3)
@@ -183,7 +182,7 @@ test('works correctly')
 
 #### Default fixture
 
-Since Vitest 2.2, you can provide different values in different [projects](/guide/workspace). To enable this feature, pass down `{ injected: true }` to the options. If the key is not specified in the [project configuration](/config/#provide), then the default value will be used.
+从 Vitest 2.2 开始，你可以在不同的 [projects](/guide/workspace) 中提供不同的值。要启用此功能，请将`{ injected: true }` 传递给选项。如果未在 [project configuration](/config/#provide) 中指定密钥，则将使用默认值。
 
 :::code-group
 ```ts [fixtures.test.ts]

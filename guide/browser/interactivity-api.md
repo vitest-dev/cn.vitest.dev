@@ -47,8 +47,8 @@ function setup(): UserEvent
 与 `@testing-library/user-event` 不同，来自 `@vitest/browser/context` 的默认 `userEvent` 实例只创建一次，而不是每次调用其方法时都创建一次！您可以从本代码段中看到其工作方式的不同之处：
 
 ```ts
-import { userEvent as vitestUserEvent } from '@vitest/browser/context'
 import { userEvent as originalUserEvent } from '@testing-library/user-event'
+import { userEvent as vitestUserEvent } from '@vitest/browser/context'
 
 await vitestUserEvent.keyboard('{Shift}') // press shift without releasing
 await vitestUserEvent.keyboard('{/Shift}') // releases shift

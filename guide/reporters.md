@@ -27,7 +27,6 @@ export default defineConfig({
 
 某些报告器可以通过传递附加选项进行自定义。具体选项将在下面的章节中介绍。
 
-
 ```ts
 export default defineConfig({
   test: {
@@ -98,12 +97,9 @@ export default defineConfig({
 
 ### 默认报告器
 
-<<<<<<< HEAD
 默认情况下（即未指定报告程序），Vitest 会在每个测试套件运行时分级显示结果，并在套件通过后折叠显示。所有测试运行结束后，最终终端输出将显示结果摘要和失败测试的详细信息。
-=======
-By default (i.e. if no reporter is specified), Vitest will display summary of running tests and their status at the bottom. Once a suite passes, its status will be reported on top of the summary.
 
-You can disable the summary by configuring the reporter:
+你可以通过配置报告器来禁用摘要：
 
 :::code-group
 ```ts [vitest.config.ts]
@@ -116,7 +112,6 @@ export default defineConfig({
 })
 ```
 :::
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 项目中的测试输出示例:
 
@@ -149,11 +144,7 @@ export default defineConfig({
 
 ### 基础报告器
 
-<<<<<<< HEAD
-基础报告器会显示已运行的测试文件，以及整个套件运行结束后的结果摘要。单独的测试除非不合格，否则不列入报告。
-=======
-The `basic` reporter is equivalent to `default` reporter without `summary`.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+基础报告器等同于默认报告器，只是不包含摘要。
 
 :::code-group
 
@@ -185,11 +176,7 @@ export default defineConfig({
 
 ### 详细报告器
 
-<<<<<<< HEAD
-采用与`默认报告器`相同的层次结构，但不会折叠已通过测试套件的子树。终端最终输出会显示所有已运行的测试，包括已通过的测试。
-=======
-Verbose reporter is same as `default` reporter, but it also displays each individual test after the suite has finished. It also displays currently running tests that are taking longer than [`slowTestThreshold`](/config/#slowtestthreshold). Similar to `default` reporter, you can disable the summary by configuring the reporter.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+详细报告器与 `默认` 报告器相同，但它也在套件完成后显示每个单独的测试。它还显示了当前运行的测试，这些测试花费的时间超过了[`slowTestThreshold`](/config/#slowtestthreshold)。与 `默认` 报告器类似，你可以通过配置报告器来禁用摘要。
 
 :::code-group
 
@@ -200,23 +187,16 @@ npx vitest --reporter=verbose
 ```ts [vitest.config.ts]
 export default defineConfig({
   test: {
-<<<<<<< HEAD
-    reporters: ['verbose'],
-=======
     reporters: [
       ['verbose', { summary: false }]
     ]
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
   },
 })
 ```
 
 :::
 
-<<<<<<< HEAD
-测试套件通过后的终端最终输出示例:
-=======
-Example output for tests in progress with default `slowTestThreshold: 300`:
+使用默认 `slowTestThreshold: 300` 进行测试的示例输出：
 
 ```bash
  ✓ __tests__/example-1.test.ts (2) 725ms
@@ -234,24 +214,7 @@ Example output for tests in progress with default `slowTestThreshold: 300`:
    Duration 2.00s
 ```
 
-Example of final terminal output for a passing test suite:
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
-
-```bash
-✓ __tests__/file1.test.ts (2) 725ms
-   ✓ first test file (2) 725ms
-     ✓ 2 + 2 should equal 4
-     ✓ 4 - 2 should equal 2
-✓ __tests__/file2.test.ts (2) 746ms
-  ✓ second test file (2) 746ms
-    ✓ 1 + 1 should equal 2
-    ✓ 2 - 1 should equal 1
-
- Test Files  2 passed (2)
-      Tests  4 passed (4)
-   Start at  12:34:32
-   Duration  1.26s (transform 35ms, setup 1ms, collect 90ms, tests 1.47s, environment 0ms, prepare 267ms)
-```
+通过测试套件的最终终端输出示例：
 
 ### Dot 报告器
 
@@ -322,43 +285,27 @@ AssertionError: expected 5 to be 4 // Object.is equality
 </testsuites>
 ```
 
-<<<<<<< HEAD
-输出的 XML 包含嵌套的 `testsuites` 和 `testcase` 标签。我们可以使用 reporter 选项来配置这些属性：
-=======
-The outputted XML contains nested `testsuites` and `testcase` tags. These can also be customized via reporter options `suiteName` and `classnameTemplate`. `classnameTemplate` can either be a template string or a function.
+输出的 XML 包含嵌套的 `testsuites` 和 `testcase` 标签。这些也可以通过报告器选项 `suiteName` 和`classnameTemplate`进行定制 `classnameTemplate` 可以是模板字符串或函数。
 
-The supported placeholders for the `classnameTemplate` option are:
+`classnameTemplate` 选项支持的占位符有：
 - filename
 - filepath
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 ```ts
 export default defineConfig({
   test: {
     reporters: [
-<<<<<<< HEAD
-      [
-        'junit',
-        { suiteName: 'custom suite name', classname: 'custom-classname' },
-      ],
-    ],
-=======
       ['junit', { suiteName: 'custom suite name', classnameTemplate: 'filename:{filename} - filepath:{filepath}' }]
     ]
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
   },
 })
 ```
 
 输出的 XML 包含嵌套的 `testsuites` 和 `testcase` 标记。你可以使用环境变量 `VITEST_JUNIT_SUITE_NAME` 和 `VITEST_JUNIT_CLASSNAME` 分别配置它们的名称和类名属性。
 
-<<<<<<< HEAD
 ### JSON 报告器
 
-以 JSON 格式输出测试结果报告。既可打印到终端，也可使用 [`outputFile`](##报告器输出) 配置选项写入文件。
-=======
-Generates a report of the test results in a JSON format compatible with Jest's `--json` option. Can either be printed to the terminal or written to a file using the [`outputFile`](/config/#outputfile) configuration option.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+以 JSON 格式输出测试结果报告。既可打印到终端，也可使用 [`outputFile`](/config/#outputfile) 配置选项写入文件。
 
 :::code-group
 
@@ -419,15 +366,11 @@ JSON 报告示例:
 }
 ```
 
-<<<<<<< HEAD
 ### HTML 报告器
-=======
-::: info
-Since Vitest 2.2, the JSON reporter includes coverage information in `coverageMap` if coverage is enabled.
-:::
 
-### HTML Reporter
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+::: info
+从 Vitest 2.2 开始，如果启用了覆盖，JSON 报告器会在 `coverageMap` 中包含覆盖信息。
+:::
 
 生成 HTML 文件，通过交互式 [GUI](/guide/ui) 查看测试结果。文件生成后，Vitest 将保持本地开发服务器运行，并提供一个链接，以便在浏览器中查看报告。
 

@@ -64,9 +64,9 @@ export default defineConfig({
 你可以通过调用 `vitest.state.getReportedEntity(runnerTask)` 访问此 API：
 
 ```ts twoslash
+import type { RunnerTestFile } from 'vitest'
 // @noErrors
 import type { Vitest } from 'vitest/node'
-import type { RunnerTestFile } from 'vitest'
 import type { Reporter, TestModule } from 'vitest/reporters'
 
 class MyReporter implements Reporter {
@@ -88,11 +88,8 @@ class MyReporter implements Reporter {
   }
 }
 ```
-<<<<<<< HEAD
 
 我们计划在 Vitest 2.1 中稳定该应用程序接口。
-=======
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 :::
 
 ### TestCase
@@ -388,7 +385,6 @@ function onFileCollected(testModule: TestModule): void {
 }
 ```
 
-<<<<<<< HEAD
 ### TestProject
 
 `TestProject` 是与文件相关联的项目。该文件中的每个测试和套件都将引用同一个项目。
@@ -439,9 +435,6 @@ declare class TestProject {
 ```
 
 ## 导出报告器 (Exported Reporters)
-=======
-## Exported Reporters
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 `vitest` 附带了一些[内置报告器](/guide/reporters)，你可以开箱即用。
 

@@ -67,8 +67,8 @@ Vitest 捆绑了 [`@testing-library/jest-dom`](https://github.com/testing-librar
 浏览器中的测试由于其异步特性，可能会不一致地失败。因此，即使条件延迟（如超时、网络请求或动画），也必须有办法保证断言成功。为此，Vitest 通过 [`expect.poll`](/api/expect#poll)和 `expect.element` API 提供了可重试的断言：
 
 ```ts
-import { expect, test } from 'vitest'
 import { page } from '@vitest/browser/context'
+import { expect, test } from 'vitest'
 
 test('error banner is rendered', async () => {
   triggerError()

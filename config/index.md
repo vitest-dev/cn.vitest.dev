@@ -467,9 +467,9 @@ export default defineConfig({
 如果你已经在项目中使用 [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import)，你也可以直接用它来自动导入这些 API。
 
 ```ts
+import AutoImport from 'unplugin-auto-import/vite'
 // vitest.config.ts
 import { defineConfig } from 'vitest/config'
-import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
   plugins: [
@@ -1097,6 +1097,7 @@ globalThis.resetBeforeEachTest = true
 使用 `inject` 方法定义可在测试中访问的值。
 
 :::code-group
+
 ```ts [vitest.config.js]
 import { defineConfig } from 'vitest/config'
 
@@ -1108,6 +1109,7 @@ export default defineConfig({
   },
 })
 ```
+
 ```ts [my.test.js]
 import { expect, inject, test } from 'vitest'
 
@@ -1115,6 +1117,7 @@ test('api key is defined', () => {
   expect(inject('API_KEY')).toBe('123')
 })
 ```
+
 :::
 
 ::: warning
@@ -1136,6 +1139,7 @@ declare module 'vitest' {
 // mark this file as a module so augmentation works correctly
 export {}
 ```
+
 :::
 
 ### globalSetup
@@ -1185,7 +1189,7 @@ inject('wsPort') === 3000
 
 :::
 
-Since Vitest 2.2.0, you can define a custom callback function to be called when Vitest reruns tests. If the function is asynchronous, the runner will wait for it to complete before executing the tests.
+从 Vitest 2.2.0 开始，您可以定义一个自定义回调函数，以便在 Vitest 重新运行测试时调用。如果函数是异步的，运行器将在执行测试之前等待它完成。
 
 ```ts
 import type { GlobalSetupContext } from 'vitest/node'
@@ -1560,6 +1564,7 @@ This is different from Jest behavior.
 Sets thresholds to 100 for files matching the glob pattern.
 
 <!-- eslint-skip -->
+
 ```ts
 {
   coverage: {
@@ -1844,7 +1849,7 @@ export default defineConfig({
 - **Type:** `{ width, height }`
 - **Default:** `414x896`
 
-默认 iframe 的viewport。
+默认 iframe 的 viewport。
 
 #### browser.locators {#browser-locators}
 
@@ -1876,7 +1881,7 @@ Attribute used to find elements with `getByTestId` locator.
 - **类型:** `BrowserScript[]`
 - **默认值:** `[]`
 
-在启动测试 iframe 之前，应注入orchestrator HTML 中的自定义脚本。此 HTML 文档仅设置 iframe，并不实际导入您的代码。
+在启动测试 iframe 之前，应注入 orchestrator HTML 中的自定义脚本。此 HTML 文档仅设置 iframe，并不实际导入您的代码。
 
 脚本 `src` 和 `content` 将由 Vite 插件处理。脚本应以以下格式提供：
 
@@ -2019,13 +2024,8 @@ export default defineConfig({
 
 ### resolveSnapshotPath<NonProjectOption />
 
-<<<<<<< HEAD
-- **类型**: `(testPath: string, snapExtension: string) => string`
+- **类型**: `(testPath: string, snapExtension: string, context: { config: SerializedConfig }) => string`
 - **默认值**: 存储快照文件在 `__snapshots__` 目录
-=======
-- **Type**: `(testPath: string, snapExtension: string, context: { config: SerializedConfig }) => string`
-- **Default**: stores snapshot files in `__snapshots__` directory
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 覆盖快照的默认路径。例如，要在测试文件旁边存储一下快照：
 
@@ -2138,7 +2138,7 @@ export default defineConfig({
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  cacheDir: 'custom-folder/.vitest'
+  cacheDir: 'custom-folder/.vitest',
 })
 ```
 
@@ -2148,7 +2148,7 @@ export default defineConfig({
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  cacheDir: process.env.VITEST ? 'custom-folder/.vitest' : undefined
+  cacheDir: process.env.VITEST ? 'custom-folder/.vitest' : undefined,
 })
 ```
 
@@ -2424,30 +2424,20 @@ export default defineConfig({
 
 ### diff
 
-<<<<<<< HEAD
 - **类型:** `string`
-- **命令行终端:** `--diff=<value>`
+- **命令行终端:** `--diff=<path>`
 
 生成差异界面时使用的不同配置的路径。如果你想自定义差异显示，这将非常有用。
 
-:::code-group
+`DiffOptions` 对象或导出 `DiffOptions` 的模块的路径。如果你想自定义差异显示，这很有用。
 
-```ts [vitest.diff.ts]
-import type { DiffOptions } from 'vitest'
-import c from 'tinyrainbow'
-=======
-- **Type:** `string`
-- **CLI:** `--diff=<path>`
-
-`DiffOptions` object or a path to a module which exports `DiffOptions`. Useful if you want to customize diff display.
-
-For example, as a config object:
+例如，作为配置对象：
 
 :::code-group
+
 ```ts [vitest.config.js]
-import { defineConfig } from 'vitest/config'
 import c from 'picocolors'
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
@@ -2455,15 +2445,17 @@ export default defineConfig({
       aIndicator: c.bold('--'),
       bIndicator: c.bold('++'),
       omitAnnotationLines: true,
-    }
-  }
+    },
+  },
 })
 ```
+
 :::
 
-Or as a module:
+或者作为一个模块：
 
 :::code-group
+
 ```ts [vitest.config.js]
 import { defineConfig } from 'vitest/config'
 
@@ -2474,8 +2466,6 @@ export default defineConfig({
 })
 ```
 
-<<<<<<< HEAD
-=======
 ```ts [vitest.diff.ts]
 import type { DiffOptions } from 'vitest'
 import c from 'picocolors'
@@ -2486,41 +2476,31 @@ export default {
   omitAnnotationLines: true,
 } satisfies DiffOptions
 ```
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+
 :::
 
 #### diff.expand
 
-- **Type**: `boolean`
-- **Default**: `true`
-- **CLI:** `--diff.expand=false`
+- **类型**: `boolean`
+- **默认值**: `true`
+- **命令行终端:** `--diff.expand=false`
 
-Expand all common lines.
+是否展开所有常规行。
 
 #### diff.truncateThreshold
 
-<<<<<<< HEAD
 - **类型**: `number`
 - **默认值**: `0`
-=======
-- **Type**: `number`
-- **Default**: `0`
-- **CLI:** `--diff.truncateThreshold=<path>`
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+- **命令行终端:** `--diff.truncateThreshold=<path>`
 
 要显示的差异结果的最大长度。超过此阈值的差异将被截断。
 默认值为 0 时，截断不会生效。
 
 #### diff.truncateAnnotation
 
-<<<<<<< HEAD
 - **类型**: `string`
 - **默认值**: `'... Diff result is truncated'`
-=======
-- **Type**: `string`
-- **Default**: `'... Diff result is truncated'`
-- **CLI:** `--diff.truncateAnnotation=<annotation>`
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+- **命令行终端:** `--diff.truncateAnnotation=<annotation>`
 
 在 diff 结果末尾输出的注释（如果被截断）。
 
@@ -2530,13 +2510,6 @@ Expand all common lines.
 - **默认值**: `noColor = (string: string): string => string`
 
 截断注释的颜色，默认为无色输出。
-
-#### diff.printBasicPrototype
-
-- **Type**: `boolean`
-- **Default**: `true`
-
-Print basic prototype `Object` and `Array` in diff output
 
 ### fakeTimers
 
@@ -2622,6 +2595,7 @@ Vitest API 在 [reporters](#reporters) 中接收任务时是否应包含`locatio
 `location` 属性的 `列` 和 `行` 值与原始文件中的 `test` 或 `describe` 位置相对应。
 
 如果您没有明确禁用该选项，并且在运行 Vitest 时使用了该选项，则该选项将自动启用：
+
 - [Vitest UI](/guide/ui)
 - 或使用不带 [headless](/guide/browser/#headless) 模式的 [浏览器模式](/guide/browser/)
 - 或使用[HTML 报告器](/guide/reporters#html-reporter)

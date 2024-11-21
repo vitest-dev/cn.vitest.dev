@@ -15,18 +15,23 @@ outline: deep
 为方便设置，可使用 `vitest init browser` 命令安装所需的依赖项并创建浏览器配置。
 
 ::: code-group
+
 ```bash [npm]
 npx vitest init browser
 ```
+
 ```bash [yarn]
 yarn exec vitest init browser
 ```
+
 ```bash [pnpm]
 pnpx vitest init browser
 ```
+
 ```bash [bun]
 bunx vitest init browser
 ```
+
 :::
 
 ### 手动安装
@@ -34,18 +39,23 @@ bunx vitest init browser
 您也可以手动安装软件包。默认情况下，浏览器模式不需要任何额外的 E2E provider 就能在本地运行测试，因为它会复用你现有的浏览器。
 
 ::: code-group
+
 ```bash [npm]
 npm install -D vitest @vitest/browser
 ```
+
 ```bash [yarn]
 yarn add -D vitest @vitest/browser
 ```
+
 ```bash [pnpm]
 pnpm add -D vitest @vitest/browser
 ```
+
 ```bash [bun]
 bun add -D vitest @vitest/browser
 ```
+
 :::
 
 ::: warning
@@ -59,35 +69,45 @@ bun add -D vitest @vitest/browser
 [Playwright](https://npmjs.com/package/playwright) 是一个用于网络测试和自动化的框架。
 
 ::: code-group
+
 ```bash [npm]
 npm install -D vitest @vitest/browser playwright
 ```
+
 ```bash [yarn]
 yarn add -D vitest @vitest/browser playwright
 ```
+
 ```bash [pnpm]
 pnpm add -D vitest @vitest/browser playwright
 ```
+
 ```bash [bun]
 bun add -D vitest @vitest/browser playwright
 ```
+
 == WebdriverIO
 
 [WebdriverIO](https://www.npmjs.com/package/webdriverio) 允许您使用 WebDriver 协议在本地运行测试。
 
 ::: code-group
+
 ```bash [npm]
 npm install -D vitest @vitest/browser webdriverio
 ```
+
 ```bash [yarn]
 yarn add -D vitest @vitest/browser webdriverio
 ```
+
 ```bash [pnpm]
 pnpm add -D vitest @vitest/browser webdriverio
 ```
+
 ```bash [bun]
 bun add -D vitest @vitest/browser webdriverio
 ```
+
 :::
 
 ## 配置
@@ -102,26 +122,23 @@ export default defineConfig({
       enabled: true,
       name: 'chromium', // browser name is required
     },
-  }
+  },
 })
 ```
 
 ::: info
-<<<<<<< HEAD
 Vitest 分配的端口为 `63315`，以避免与开发服务器冲突，从而允许同时运行两个服务器。你可以使用 [`browser.api`](/config/#browser-api) 选项来更改。
-=======
-Vitest assigns port `63315` to avoid conflicts with the development server, allowing you to run both in parallel. You can change that with the [`browser.api`](/config/#browser-api) option.
 
-Since Vitest 2.1.5, the CLI no longer prints the Vite URL automatically. You can press "b" to print the URL when running in watch mode.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+从 Vitest 2.1.5 开始，CLI 不再自动打印 Vite URL。在监视模式下运行时，你可以按 “b” 打印 URL。
 :::
 
 如果之前未使用过 Vite，请确保已安装框架插件并在配置中指定。有些框架可能需要额外配置才能运行，请查看其 Vite 相关文档以确定。
 
 ::: code-group
+
 ```ts [vue]
-import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [vue()],
@@ -130,13 +147,14 @@ export default defineConfig({
       enabled: true,
       provider: 'playwright',
       name: 'chromium',
-    }
-  }
+    },
+  },
 })
 ```
+
 ```ts [svelte]
-import { defineConfig } from 'vitest/config'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [svelte()],
@@ -145,13 +163,14 @@ export default defineConfig({
       enabled: true,
       provider: 'playwright',
       name: 'chromium',
-    }
-  }
+    },
+  },
 })
 ```
+
 ```ts [solid]
-import { defineConfig } from 'vitest/config'
 import solidPlugin from 'vite-plugin-solid'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [solidPlugin()],
@@ -160,13 +179,14 @@ export default defineConfig({
       enabled: true,
       provider: 'playwright',
       name: 'chromium',
-    }
-  }
+    },
+  },
 })
 ```
+
 ```ts [marko]
-import { defineConfig } from 'vitest/config'
 import marko from '@marko/vite'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [marko()],
@@ -175,10 +195,11 @@ export default defineConfig({
       enabled: true,
       provider: 'playwright',
       name: 'chromium',
-    }
-  }
+    },
+  },
 })
 ```
+
 :::
 
 ::: tip
@@ -278,7 +299,8 @@ export default defineConfig({
 
 ## 浏览器选项类型
 
-Vitest 中的浏览器选项取决于provider。如果在配置文件中传递 `--browser` 且未指定其名称，则 Vitest 将失败。可用选项：
+Vitest 中的浏览器选项取决于 provider。如果在配置文件中传递 `--browser` 且未指定其名称，则 Vitest 将失败。可用选项：
+
 - `webdriverio` 支持这些浏览器:
   - `firefox`
   - `chrome`
@@ -332,7 +354,7 @@ export default defineConfig({
       enabled: true,
       headless: true,
     },
-  }
+  },
 })
 ```
 
@@ -345,7 +367,7 @@ npx vitest --browser.name=chrome --browser.headless
 在这种情况下，Vitest 将使用 Chrome 浏览器以 headless 模式运行。
 
 ::: warning
-默认情况下Headless模式不可用。您需要使用 [`playwright`](https://npmjs.com/package/playwright) 或 [`webdriverio`](https://www.npmjs.com/package/webdriverio) 提供程序来启用此功能。
+默认情况下 Headless 模式不可用。您需要使用 [`playwright`](https://npmjs.com/package/playwright) 或 [`webdriverio`](https://www.npmjs.com/package/webdriverio) 提供程序来启用此功能。
 :::
 
 ## Examples
@@ -361,13 +383,13 @@ Vitest 提供的软件包可为多个流行框架呈现开箱即用的组件：
 除了使用 `@testing-library/your-framework` 渲染组件和查询元素外，你还需要进行断言。Vitest 捆绑了 [`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom)库，可提供各种开箱即用的 DOM 断言。更多信息请参阅 [Assertions API](/guide/browser/assertion-api)。
 
 ```ts
-import { expect } from 'vitest'
 import { page } from '@vitest/browser/context'
+import { expect } from 'vitest'
 // element is rendered correctly
 await expect.element(page.getByText('Hello World')).toBeInTheDocument()
 ```
-Vitest 公开了一个[Context API](/guide/browser/context)，其中包含一小套在测试中可能有用的实用程序。例如，如果您需要进行交互，如点击元素或在输入框中输入文本，您可以使用 `@vitest/browser/context` 中的 `userEvent`。更多信息请参阅 [Interactivity API](/guide/browser/interactivity-api)。
 
+Vitest 公开了一个[Context API](/guide/browser/context)，其中包含一小套在测试中可能有用的实用程序。例如，如果您需要进行交互，如点击元素或在输入框中输入文本，您可以使用 `@vitest/browser/context` 中的 `userEvent`。更多信息请参阅 [Interactivity API](/guide/browser/interactivity-api)。
 
 ```ts
 import { page, userEvent } from '@vitest/browser/context'
@@ -377,6 +399,7 @@ await page.getByLabelText(/username/i).fill('Alice')
 ```
 
 ::: code-group
+
 ```ts [vue]
 import { render } from 'vitest-browser-vue'
 import Component from './Component.vue'
@@ -385,7 +408,9 @@ test('properly handles v-model', async () => {
   const screen = render(Component)
 
   // Asserts initial state.
-  await expect.element(screen.getByText('Hi, my name is Alice')).toBeInTheDocument()
+  await expect
+    .element(screen.getByText('Hi, my name is Alice'))
+    .toBeInTheDocument()
 
   // Get the input DOM node by querying the associated label.
   const usernameInput = screen.getByLabelText(/username/i)
@@ -394,12 +419,15 @@ test('properly handles v-model', async () => {
   // is filled correctly, no need to check the value manually.
   await usernameInput.fill('Bob')
 
-  await expect.element(screen.getByText('Hi, my name is Bob')).toBeInTheDocument()
+  await expect
+    .element(screen.getByText('Hi, my name is Bob'))
+    .toBeInTheDocument()
 })
 ```
+
 ```ts [svelte]
-import { render } from 'vitest-browser-svelte'
 import { expect, test } from 'vitest'
+import { render } from 'vitest-browser-svelte'
 
 import Greeter from './greeter.svelte'
 
@@ -413,6 +441,7 @@ test('greeting appears on click', async () => {
   await expect.element(greeting).toBeInTheDocument()
 })
 ```
+
 ```tsx [react]
 import { render } from 'vitest-browser-react'
 import Fetch from './fetch'
@@ -430,6 +459,7 @@ test('loads and displays greeting', async () => {
   await expect.element(screen.getByRole('button')).toBeDisabled()
 })
 ```
+
 :::
 
 Vitest 并不支持所有开箱即用的框架，但您可以使用外部工具来运行这些框架的测试。我们还鼓励社区创建他们自己的 `vitest-browser` 封装程序，如果您有这样的封装程序，请随时将其添加到上述示例中。
@@ -441,26 +471,25 @@ Vitest 并不支持所有开箱即用的框架，但您可以使用外部工具�
 - [`@marko/testing-library`](https://testing-library.com/docs/marko-testing-library/intro) 渲染 [marko](https://markojs.com) 组件
 
 ::: warning
-`testing-library` 提供了一个软件包 `@testing-library/user-event`。我们不建议直接使用它，因为它会模拟事件而非实际触发事件--相反，请使用从 `@vitest/browser/context`导入的 [`userEvent`](/guide/browser/interactivity-api)，它在引擎盖下使用 Chrome DevTools 协议或 Webdriver（取决于provider）。
+`testing-library` 提供了一个软件包 `@testing-library/user-event`。我们不建议直接使用它，因为它会模拟事件而非实际触发事件--相反，请使用从 `@vitest/browser/context`导入的 [`userEvent`](/guide/browser/interactivity-api)，它在引擎盖下使用 Chrome DevTools 协议或 Webdriver（取决于 provider）。
 :::
 
 ::: code-group
+
 ```tsx [preact]
 // based on @testing-library/preact example
 // https://testing-library.com/docs/preact-testing-library/example
 
-import { h } from 'preact'
-import { page } from '@vitest/browser/context'
 import { render } from '@testing-library/preact'
+import { page } from '@vitest/browser/context'
+import { h } from 'preact'
 
 import HiddenMessage from '../hidden-message'
 
 test('shows the children when the checkbox is checked', async () => {
   const testMessage = 'Test Message'
 
-  const { baseElement } = render(
-    <HiddenMessage>{testMessage}</HiddenMessage>,
-  )
+  const { baseElement } = render(<HiddenMessage>{testMessage}</HiddenMessage>)
 
   const screen = page.elementLocator(baseElement)
 
@@ -475,6 +504,7 @@ test('shows the children when the checkbox is checked', async () => {
   await expect.element(screen.getByText(testMessage)).toBeInTheDocument()
 })
 ```
+
 ```tsx [solid]
 // baed on @testing-library/solid API
 // https://testing-library.com/docs/solid-testing-library/api
@@ -502,6 +532,7 @@ it('uses params', async () => {
   await expect.screen(screen.getByText('Id: 1234')).toBeInTheDocument()
 })
 ```
+
 ```ts [marko]
 // baed on @testing-library/marko API
 // https://testing-library.com/docs/marko-testing-library/api
@@ -518,6 +549,7 @@ test('renders a message', async () => {
   `)
 })
 ```
+
 :::
 
 ## 限制

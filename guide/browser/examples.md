@@ -25,8 +25,8 @@ title: Examples | Browser Mode
 // based on @testing-library/vue example
 // https://testing-library.com/docs/vue-testing-library/examples
 
-import { userEvent } from '@vitest/browser/context'
 import { render, screen } from '@testing-library/vue'
+import { userEvent } from '@vitest/browser/context'
 import Component from './Component.vue'
 
 test('properly handles v-model', async () => {
@@ -70,8 +70,8 @@ test('greeting appears on click', async () => {
 // based on @testing-library/react example
 // https://testing-library.com/docs/react-testing-library/example-intro
 
-import { userEvent } from '@vitest/browser/context'
 import { render, screen } from '@testing-library/react'
+import { userEvent } from '@vitest/browser/context'
 import Fetch from './fetch'
 
 test('loads and displays greeting', async () => {
@@ -91,9 +91,9 @@ test('loads and displays greeting', async () => {
 // based on @testing-library/preact example
 // https://testing-library.com/docs/preact-testing-library/example
 
-import { h } from 'preact'
-import { userEvent } from '@vitest/browser/context'
 import { render } from '@testing-library/preact'
+import { userEvent } from '@vitest/browser/context'
+import { h } from 'preact'
 
 import HiddenMessage from '../hidden-message'
 

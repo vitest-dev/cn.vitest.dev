@@ -263,7 +263,6 @@ vitest --merge-reports --reporter=junit --coverage.reporter=text
 
 了解更多信息 [`性能优化 | 分片`](/guide/improving-performance#sharding)
 
-
 ## 环境变量
 
 Vitest 只从 `.env` 文件中自动加载以 `VITE_` 为前缀的环境变量，以保持与前端相关测试的兼容性，并遵守 [Vite 的既定惯例](https://vitejs.dev/guide/env-and-mode.html#env-files)。要从 `.env` 文件加载所有环境变量，可以使用从 `vite` 导入的 `loadEnv` 方法：

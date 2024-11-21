@@ -29,7 +29,6 @@ import { vi } from 'vitest'
 Vitest 不会模拟 [setup file](/config/#setupfiles) 中导入的模块，因为这些模块在运行测试文件时已被缓存。我们可以在 [`vi.hoisted`](#vi-hoisted) 中调用 [`vi.resetModules()`](#vi-resetmodules) ，在运行测试文件前清除所有模块缓存。
 :::
 
-
 如果定义了 `factory` 函数，所有导入都将返回其结果。Vitest 只调用一次 factory，并缓存所有后续导入的结果，直到 [`vi.unmock`](#vi-unmock) 或 [`vi.doUnmock`](#vi-dounmock) 被调用。
 
 与 `jest` 不同，工厂可以是异步的。你可以使用 [`vi.importActual`](#vi-importactual)，或将工厂作为第一个参数传递的助手，并在其中获取原始模块。
@@ -53,9 +52,9 @@ Vitest 还在 `vi.mock` 和 `vi.doMock` 方法中支持 module promise 而非字
 
 ```ts twoslash
 // @filename: ./path/to/module.js
-export declare function total(...numbers: number[]): number
 // @filename: test.js
 import { vi } from 'vitest'
+export declare function total(...numbers: number[]): number
 // ---cut---
 vi.mock(import('./path/to/module.js'), async (importOriginal) => {
   const mod = await importOriginal() // type is inferred

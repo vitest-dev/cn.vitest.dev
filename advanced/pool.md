@@ -42,19 +42,8 @@ import { ProcessPool, TestSpecification } from 'vitest/node'
 
 export interface ProcessPool {
   name: string
-<<<<<<< HEAD
-  runTests: (
-    files: [project: WorkspaceProject, testFile: string][],
-    invalidates?: string[]
-  ) => Promise<void>
-  collectTests: (
-    files: [project: WorkspaceProject, testFile: string][],
-    invalidates?: string[]
-  ) => Promise<void>
-=======
   runTests: (files: TestSpecification[], invalidates?: string[]) => Promise<void>
   collectTests: (files: TestSpecification[], invalidates?: string[]) => Promise<void>
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
   close?: () => Promise<void>
 }
 ```
@@ -74,7 +63,7 @@ Vitest 会等到 `runTests` 执行完毕后才结束运行（即只有在 `runTe
 ```ts
 import { createBirpc } from 'birpc'
 import { parse, stringify } from 'flatted'
-import { createMethodsRPC, WorkspaceProject } from 'vitest/node'
+import { WorkspaceProject, createMethodsRPC } from 'vitest/node'
 
 function createRpc(project: WorkspaceProject, wss: WebSocketServer) {
   return createBirpc(createMethodsRPC(project), {

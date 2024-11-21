@@ -63,7 +63,7 @@ test('expect.soft test', () => {
 
 ```ts
 interface ExpectPoll extends ExpectStatic {
-  (actual: () => T, options: { interval; timeout; message }): Promise<Assertions<T>>
+  (actual: () => T, options: { interval, timeout, message }): Promise<Assertions<T>>
 }
 ```
 
@@ -82,11 +82,7 @@ test('element exists', async () => {
 ```
 
 ::: warning
-<<<<<<< HEAD
-`expect.poll` 使每个断言都异步，所以不要忘记等待它，否则可能会收到未经处理的 promise 拒绝。
-=======
-`expect.poll` makes every assertion asynchronous, so you need to await it. Since Vitest 2.2, if you forget to await it, the test will fail with a warning to do so.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+`expect.poll` makes every assertion asynchronous, so you need to await it. 从 Vitest 2.2 开始，如果你忘记等待它，测试将失败并发出警告。
 
 `expect.poll` 不适用于多个匹配器：
 
@@ -733,8 +729,6 @@ test('matches snapshot', () => {
 })
 ```
 
-<<<<<<< HEAD
-=======
 ## toMatchInlineSnapshot
 
 - **Type:** `<T>(shape?: Partial<T> | string, snapshot?: string, message?: string) => void`
@@ -1124,7 +1118,6 @@ test('spy function resolved a value', async () => {
 })
 ```
 
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 ## toHaveResolvedTimes
 
 - **类型**: `(amount: number) => Awaitable<void>`
@@ -1255,13 +1248,9 @@ test('buyApples returns new stock id', async () => {
 ```
 
 :::warning
-<<<<<<< HEAD
 如果断言没有被等待，那么将得到一个虚假的测试，它将每次都通过。为了确保断言实际上被调用，需要使用 [`expect.assertions(number)`](#expect-assertions)。
-=======
-If the assertion is not awaited, then you will have a false-positive test that will pass every time. To make sure that assertions are actually called, you may use [`expect.assertions(number)`](#expect-assertions).
 
-Since Vitest 2.2, if a method is not awaited, Vitest will show a warning at the end of the test. In Vitest 3, the test will be marked as "failed" if the assertion is not awaited.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+从 Vitest 2.2 开始，如果不等待方法，Vitest 将在测试结束时显示警告。在Vitest 3 中，如果不等待断言，测试将被标记为 “失败”。
 :::
 
 ## rejects
@@ -1290,13 +1279,9 @@ test('buyApples throws an error when no id provided', async () => {
 ```
 
 :::warning
-<<<<<<< HEAD
 如果不等待断言，那么将得到每次都会通过的误报测试。 为了确保确实调用了断言，可以使用 [`expect.assertions(number)`](#expect-assertions)。
-=======
-If the assertion is not awaited, then you will have a false-positive test that will pass every time. To make sure that assertions were actually called, you can use [`expect.assertions(number)`](#expect-assertions).
 
-Since Vitest 2.2, if a method is not awaited, Vitest will show a warning at the end of the test. In Vitest 3, the test will be marked as "failed" if the assertion is not awaited.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
+从 Vitest 2.2 开始，如果不等待方法，Vitest 将在测试结束时显示警告。在 Vitest 3 中，如果不等待断言，测试将被标记为“失败”。
 :::
 
 ## expect.assertions

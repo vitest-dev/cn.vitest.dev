@@ -68,35 +68,34 @@ export const page: {
   /**
    * Change the size of iframe's viewport.
    */
-  viewport(width: number, height: number): Promise<void>
+  viewport: (width: number, height: number) => Promise<void>
   /**
    * Make a screenshot of the test iframe or a specific element.
    * @returns Path to the screenshot file or path and base64.
    */
-  screenshot(options: Omit<ScreenshotOptions, 'base64'> & { base64: true }): Promise<{
+  screenshot: ((options: Omit<ScreenshotOptions, 'base64'> & { base64: true }) => Promise<{
     path: string
     base64: string
-  }>
-  screenshot(options?: ScreenshotOptions): Promise<string>
+  }>) & ((options?: ScreenshotOptions) => Promise<string>)
   /**
    * Extend default `page` object with custom methods.
    */
-  extend(methods: Partial<BrowserPage>): BrowserPage
+  extend: (methods: Partial<BrowserPage>) => BrowserPage
   /**
    * Wrap an HTML element in a `Locator`. When querying for elements, the search will always return this element.
    */
-  elementLocator(element: Element): Locator
+  elementLocator: (element: Element) => Locator
 
   /**
    * Locator APIs. See its documentation for more details.
    */
-  getByRole(role: ARIARole | string, options?: LocatorByRoleOptions): Locator
-  getByLabelText(text: string | RegExp, options?: LocatorOptions): Locator
-  getByTestId(text: string | RegExp): Locator
-  getByAltText(text: string | RegExp, options?: LocatorOptions): Locator
-  getByPlaceholder(text: string | RegExp, options?: LocatorOptions): Locator
-  getByText(text: string | RegExp, options?: LocatorOptions): Locator
-  getByTitle(text: string | RegExp, options?: LocatorOptions): Locator
+  getByRole: (role: ARIARole | string, options?: LocatorByRoleOptions) => Locator
+  getByLabelText: (text: string | RegExp, options?: LocatorOptions) => Locator
+  getByTestId: (text: string | RegExp) => Locator
+  getByAltText: (text: string | RegExp, options?: LocatorOptions) => Locator
+  getByPlaceholder: (text: string | RegExp, options?: LocatorOptions) => Locator
+  getByText: (text: string | RegExp, options?: LocatorOptions) => Locator
+  getByTitle: (text: string | RegExp, options?: LocatorOptions) => Locator
 }
 ```
 

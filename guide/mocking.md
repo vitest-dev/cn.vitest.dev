@@ -265,8 +265,8 @@ export function foobar(injectedFoo) {
 ### 示例
 
 ```js
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Client } from 'pg'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { failure, success } from './handlers.js'
 
 // get todos
@@ -392,9 +392,9 @@ export function readHelloWorld(path) {
 ```
 
 ```ts
+import { fs, vol } from 'memfs'
 // hello-world.test.js
 import { beforeEach, expect, it, vi } from 'vitest'
-import { fs, vol } from 'memfs'
 import { readHelloWorld } from './read-hello-world.js'
 
 // tell vitest to use fs mock from __mocks__ folder
@@ -442,9 +442,9 @@ Mock Service Worker (MSW) 的工作原理是拦截测试请求，让我们可以
 您可以像下面一样在您的 [setup file](/config/#setupfiles)
 
 ```js
-import { afterAll, afterEach, beforeAll } from 'vitest'
-import { setupServer } from 'msw/node'
 import { graphql, http, HttpResponse } from 'msw'
+import { setupServer } from 'msw/node'
+import { afterAll, afterEach, beforeAll } from 'vitest'
 
 const posts = [
   {
@@ -483,7 +483,6 @@ afterEach(() => server.resetHandlers())
 ```
 
 > 使用 `onUnhandleRequest: 'error'` 配置服务器可以确保即使某个请求没有相应的请求处理程序，也会抛出错误。
-
 
 ### 了解更多
 
@@ -598,13 +597,13 @@ vi.mock(import('./dog.js'), () => {
 
 ```ts
 // ./src/feed.ts
-function feed(dog: Dog) {
-  // ...
-}
-
 // ./tests/dog.test.ts
 import { expect, test, vi } from 'vitest'
 import { feed } from '../src/feed.js'
+
+function feed(dog: Dog) {
+  // ...
+}
 
 const Dog = vi.fn()
 Dog.prototype.feed = vi.fn()

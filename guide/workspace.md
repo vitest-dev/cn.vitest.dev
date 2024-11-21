@@ -238,5 +238,3 @@ export default defineWorkspace([
 ::: tip
 所有不支持在项目配置中使用的配置选项，在 ["Config"](/config/) 指南中以 <NonProjectOption /> 标记。
 :::
-
-

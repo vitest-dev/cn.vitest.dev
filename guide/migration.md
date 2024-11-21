@@ -7,7 +7,6 @@ outline: deep
 
 ## 迁移到 Vitest 2.0
 
-
 ### 默认数据池为 `forks`
 
 为了提高稳定性，Vitest 2.0 将 `pool` 的默认配置改为 `'fork'`。您可以在 [PR](https://github.com/vitest-dev/vitest/pull/5047)中阅读完整的动机。
@@ -143,7 +142,6 @@ Vitest 浏览器模式在测试周期内发生了很多变化。您可以在[Git
 - 检查 `c8` 覆盖率（使用 coverage-v8 代替）
 - 从 `vitest` 导出 `SnapshotEnvironment` - 改为从 `vitest/snapshot` 导入
 - 删除 `SpyInstance` 改用 `MockInstance`
-
 
 ## 迁移到 Vitest 1.0
 
@@ -397,8 +395,8 @@ Vitest 没有等效于 `jest` 的命名空间，因此你需要直接从 `Vitest
 
 ```ts
 // [!code --]
-let fn: jest.Mock<(name: string) => number> // [!code --]
-import type { Mock } from 'vitest' // [!code ++]
+// [!code --]
+import type { Mock } from 'vitest' let fn: jest.Mock<(name: string) => number> // [!code ++]
 let fn: Mock<(name: string) => number> // [!code ++]
 ```
 

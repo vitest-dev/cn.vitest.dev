@@ -103,14 +103,9 @@ Vitest 实例需要当前的测试模式。它可以是以下之一：
 
 你可以使用 `start` 方法运行测试或者基准测试。你还可以传递一个字符串数组以筛选测试文件。
 
-
 ### `provide`
 
-<<<<<<< HEAD
 Vitest 暴露了`provide`方法，它是`vitest.getCoreWorkspaceProject().provide`的简写。使用该方法，您可以从主线程向测试传递值。所有值在存储前都会通过 `structuredClone`进行检查，但值本身不会被克隆。
-=======
-Vitest exposes `provide` method which is a shorthand for `vitest.getRootTestProject().provide`. With this method you can pass down values from the main thread to tests. All values are checked with `structuredClone` before they are stored, but the values themselves are not cloned.
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 要在测试中接收值，需要从 `vitest` entrypont 导入 `inject` 方法：
 
@@ -137,19 +132,12 @@ declare module 'vitest' {
 ```
 
 ::: warning
-<<<<<<< HEAD
 从技术上讲，`provide`是`WorkspaceProject`的一个方法，因此仅限于特定的项目。不过，所有项目都继承了核心项目的值，这使得 `vitest.provide` 成为向测试传递值的通用方法。
 :::
 
 ::: tip
 在不想使用公共 API 的情况下，[全局设置文件](/config/#globalsetup) 也可以使用此方法：
-=======
-Technically, `provide` is a method of [`TestProject`](#testproject), so it is limited to the specific project. However, all projects inherit the values from the core project which makes `vitest.provide` universal way of passing down values to tests.
 :::
-
-::: tip
-This method is also available to [global setup files](/config/#globalsetup) for cases where you cannot use the public API:
->>>>>>> 74d74513bad192b4498234b7a439be8c859fa4d9
 
 ```js
 export default function setup({ provide }) {
@@ -284,8 +272,8 @@ Project context values will always override global ones.
 Create a test specification that can be used in `vitest.runFiles`. Specification scopes the test file to a specific `project` and `pool` (optionally).
 
 ```ts
-import { createVitest } from 'vitest/node'
 import { resolve } from 'node:path/posix'
+import { createVitest } from 'vitest/node'
 
 const vitest = await createVitest('test')
 const project = vitest.projects[0]
@@ -342,8 +330,8 @@ This method checks if the file is a regular test file. It uses the same config p
 This method also accepts a second parameter, which is the source code. This is used to validate if the file is an in-source test. If you are calling this method several times for several projects it is recommended to read the file once and pass it down directly.
 
 ```ts
-import { createVitest } from 'vitest/node'
 import { resolve } from 'node:path/posix'
+import { createVitest } from 'vitest/node'
 
 const vitest = await createVitest('test')
 const project = vitest.projects[0]
