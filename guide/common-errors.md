@@ -48,8 +48,7 @@ export default defineConfig({
 
 请记住，`vi.mock` 总是挂起的 - 这意味着模块在测试文件开始执行之前就已经加载了 - 很可能是在安装文件中。要修复此错误，请删除导入或清除安装文件末尾的缓存 - 请注意，在这种情况下，安装文件和测试文件将引用不同的模块。
 
-```ts
-// setupFile.js
+```ts [setupFile.js]
 import { vi } from 'vitest'
 import { sideEffect } from './mocked-file.js'
 

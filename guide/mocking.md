@@ -176,32 +176,44 @@ Vitest 支持模拟 Vite [虚拟模块](https://cn.vitejs.dev/guide/api-plugin#v
 
 1. 提供别名
 
-```ts
-// vitest.config.js
-export default {
+```ts [vitest.config.js]
+import { defineConfig } from 'vitest/config'
+export default defineConfig({
   test: {
     alias: {
       '$app/forms': resolve('./mocks/forms.js'),
     },
   },
+<<<<<<< HEAD
 }
+=======
+})
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 ```
 
 2. 提供解析虚拟模块的插件
 
-```ts
-// vitest.config.js
-export default {
+```ts [vitest.config.js]
+import { defineConfig } from 'vitest/config'
+export default defineConfig({
   plugins: [
     {
       name: 'virtual-modules',
       resolveId(id) {
         if (id === '$app/forms') {
           return 'virtual:$app/forms'
+<<<<<<< HEAD
       },
     },
   ],
 }
+=======
+        }
+      },
+    },
+  ],
+})
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 ```
 
 第二种方法的好处是可以动态创建不同的虚拟入口点。如果将多个虚拟模块重定向到一个文件中，那么所有这些模块都将受到 `vi.mock` 的影响，因此请确保使用唯一的标识符。
@@ -210,7 +222,7 @@ export default {
 
 请注意，对在同一文件的其他方法中调用的方法的模拟调用是不可能的。例如，在此代码中：
 
-```ts
+```ts [foobar.js]
 export function foo() {
   return 'foo'
 }
@@ -222,7 +234,7 @@ export function foobar() {
 
 不可能从外部模拟 `foo` 方法，因为它是直接引用的。因此，此代码对 `foobar` 内部的 `foo` 调用没有影响（但会影响其他模块中的 `foo` 调用）：
 
-```ts
+```ts [foobar.test.ts]
 import { vi } from 'vitest'
 import * as mod from './foobar.js'
 
@@ -239,8 +251,7 @@ vi.mock('./foobar.js', async (importOriginal) => {
 
 你可以通过直接向 `foobar` 方法提供实现来确认这种行为：
 
-```ts
-// foobar.test.js
+```ts [foobar.test.js]
 import * as mod from './foobar.js'
 
 vi.spyOn(mod, 'foo')
@@ -249,8 +260,7 @@ vi.spyOn(mod, 'foo')
 mod.foobar(mod.foo)
 ```
 
-```ts
-// foobar.js
+```ts [foobar.js]
 export function foo() {
   return 'foo'
 }
@@ -382,8 +392,7 @@ module.exports = fs.promises
 ```
 :::
 
-```ts
-// read-hello-world.js
+```ts [read-hello-world.js]
 import { readFileSync } from 'node:fs'
 
 export function readHelloWorld(path) {
@@ -391,8 +400,7 @@ export function readHelloWorld(path) {
 }
 ```
 
-```ts
-// hello-world.test.js
+```ts [hello-world.test.js]
 import { beforeEach, expect, it, vi } from 'vitest'
 import { fs, vol } from 'memfs'
 import { readHelloWorld } from './read-hello-world.js'
@@ -596,13 +604,12 @@ vi.mock(import('./dog.js'), () => {
 
 该方法也可用于将一个类的实例传递给接受相同接口的函数：
 
-```ts
-// ./src/feed.ts
+```ts [src/feed.ts]
 function feed(dog: Dog) {
   // ...
 }
-
-// ./tests/dog.test.ts
+```
+```ts [tests/dog.test.ts]
 import { expect, test, vi } from 'vitest'
 import { feed } from '../src/feed.js'
 
@@ -667,6 +674,7 @@ expect(nameSpy).toHaveBeenCalledTimes(1)
 
 我想…
 
+<<<<<<< HEAD
 ### 模拟导出变量
 ```js
 // some-path.js
@@ -676,6 +684,14 @@ export const getter = 'variable'
 ```ts
 // some-path.test.ts
 import * as exports from './some-path.js'
+=======
+### Mock exported variables
+```js [example.js]
+export const getter = 'variable'
+```
+```ts [example.test.ts]
+import * as exports from './example.js'
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 
 vi.spyOn(exports, 'getter', 'get').mockReturnValue('mocked')
 ```
@@ -696,22 +712,33 @@ vi.spyOn(exports, 'setter', 'set')
 不要忘记将 `vi.mock` 调用提升到文件顶部。它将始终在所有导入之前执行。
 :::
 
-```ts
-// ./some-path.js
+```ts [example.js]
 export function method() {}
 ```
 
 ```ts
+<<<<<<< HEAD
 import { method } from './some-path.js'
 vi.mock('./some-path.js', () => ({
   method: vi.fn(),
+=======
+import { method } from './example.js'
+
+vi.mock('./example.js', () => ({
+  method: vi.fn()
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 }))
 ```
 
 2. `vi.spyOn` 的示例：
 
 ```ts
+<<<<<<< HEAD
 import * as exports from './some-path.js'
+=======
+import * as exports from './example.js'
+
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 vi.spyOn(exports, 'method').mockImplementation(() => {})
 ```
 
@@ -719,15 +746,20 @@ vi.spyOn(exports, 'method').mockImplementation(() => {})
 
 1. `vi.mock` 和 `.prototype` 的示例:
 
+<<<<<<< HEAD
 ```ts
 // ./some-path.ts
+=======
+1. Example with `vi.mock` and `.prototype`:
+```ts [example.js]
+>>>>>>> 2a9b3fed3093c93aaa2059975c28bbf3b3f19031
 export class SomeClass {}
 ```
 
 ```ts
-import { SomeClass } from './some-path.js'
+import { SomeClass } from './example.js'
 
-vi.mock(import('./some-path.js'), () => {
+vi.mock(import('./example.js'), () => {
   const SomeClass = vi.fn()
   SomeClass.prototype.someMethod = vi.fn()
   return { SomeClass }
@@ -738,7 +770,7 @@ vi.mock(import('./some-path.js'), () => {
 2. `vi.spyOn` 的示例:
 
 ```ts
-import * as mod from './some-path.js'
+import * as mod from './example.js'
 
 const SomeClass = vi.fn()
 SomeClass.prototype.someMethod = vi.fn()
@@ -750,26 +782,23 @@ vi.spyOn(mod, 'SomeClass').mockImplementation(SomeClass)
 
 1. 使用 cache 的示例:
 
-```ts
-// some-path.ts
+```ts [example.js]
 export function useObject() {
   return { method: () => true }
 }
 ```
 
-```ts
-// useObject.js
-import { useObject } from './some-path.js'
+```ts [useObject.js]
+import { useObject } from './example.js'
 
 const obj = useObject()
 obj.method()
 ```
 
-```ts
-// useObject.test.js
-import { useObject } from './some-path.js'
+```ts [useObject.test.js]
+import { useObject } from './example.js'
 
-vi.mock(import('./some-path.js'), () => {
+vi.mock(import('./example.js'), () => {
   let _cache
   const useObject = () => {
     if (!_cache) {
@@ -875,8 +904,7 @@ it('the value is restored before running an other test', () => {
 })
 ```
 
-```ts
-// vitest.config.ts
+```ts [vitest.config.ts]
 export default defineConfig({
   test: {
     unstubEnvs: true,

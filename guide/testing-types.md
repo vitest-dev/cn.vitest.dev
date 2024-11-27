@@ -117,7 +117,7 @@ assertType<string>(answer)
 
 ```ts
 // @ts-expect-error answer is not a string
-assertType<string>(answr) //
+assertType<string>(answr)
 ```
 
 :::
@@ -126,7 +126,7 @@ assertType<string>(answr) //
 
 要启用类型检查，只需在 `package.json` 文件中的 Vitest 命令中添加 [`--typecheck`](/config/#typecheck) 标志：
 
-```json
+```json [package.json]
 {
   "scripts": {
     "test": "vitest --typecheck"
