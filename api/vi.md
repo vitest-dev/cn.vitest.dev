@@ -137,8 +137,7 @@ vi.mock('./path/to/module.js', () => {
 
 如果在没有提供工厂或选项的测试文件中调用 `vi.mock` ，它会在 `__mocks__` 文件夹中找到一个文件作为模块使用：
 
-```ts
-// increment.test.js
+```ts [increment.test.js]
 import { vi } from 'vitest'
 
 // axios is a default export from `__mocks__/axios.js`
@@ -179,14 +178,13 @@ vi.doMock('./increment.js')
 
 :::
 
-```ts
-// ./increment.js
+```ts [increment.js]
 export function increment(number) {
   return number + 1
 }
 ```
 
-```ts
+```ts [increment.test.js]
 import { beforeEach, test } from 'vitest'
 import { increment } from './increment.js'
 
@@ -220,8 +218,7 @@ TypeScript 的类型助手。只返回传入的对象。
 
 当 `partial` 为 `true` 时，它将期望一个 `Partial<T>` 作为返回值。默认情况下，这只会让 TypeScript 认为第一层的值是模拟的。我们可以将 `{ deep: true }` 作为第二个参数传递给 TypeScript，告诉它整个对象都是模拟的（如果实际上是的话）。
 
-```ts
-// example.ts
+```ts [example.ts]
 export function add(x: number, y: number): number {
   return x + y
 }
@@ -231,8 +228,7 @@ export function fetchSomething(): Promise<Response> {
 }
 ```
 
-```ts
-// example.test.ts
+```ts [example.test.ts]
 import * as example from './example'
 
 vi.mock('./example')
@@ -281,14 +277,13 @@ vi.mock('./example.js', async () => {
 
 与 [`vi.unmock`](#vi-unmock) 相同，但不会移动到文件顶端。下一次导入模块时，将导入原始模块而非 mock。这不会解除先前导入的模块。
 
-```ts
-// ./increment.js
+```ts [increment.js]
 export function increment(number) {
   return number + 1
 }
 ```
 
-```ts
+```ts [increment.test.js]
 import { increment } from './increment.js'
 
 // increment is already mocked, because vi.mock is hoisted

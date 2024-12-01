@@ -23,14 +23,18 @@ vitest --ui
 
 UI 也可以用作测试报告器。 在 Vitest 配置中使用 `'html'` 报告器生成 HTML 输出并预览测试结果：
 
-```ts
-// vitest.config.ts
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
 
-export default {
+export default defineConfig({
   test: {
     reporters: ['html'],
   },
+<<<<<<< HEAD
 }
+=======
+})
+>>>>>>> b629c6141185f4a49b4c443b5cdcfe1a9ddda849
 ```
 
 你可以在 Vitest UI 中查看覆盖率报告：查看 [Vitest UI 覆盖率](/guide/coverage#vitest-ui) 了解更多详情。
