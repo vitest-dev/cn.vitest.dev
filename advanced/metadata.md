@@ -22,8 +22,7 @@ test('custom', ({ task }) => {
 
 一旦测试完成，Vitest 将使用 RPC 将包含结果和 `meta` 的任务发送到 Node.js 进程。要拦截和处理此任务，你可以利用报告器实现中可用的 `onTaskUpdate` 方法：
 
-```ts
-// custom-reporter.js
+```ts [custom-reporter.js]
 export default {
   // you can intercept packs if needed
   onTaskUpdate(packs) {

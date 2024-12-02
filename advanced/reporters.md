@@ -18,8 +18,7 @@ export default class MyDefaultReporter extends DefaultReporter {
 
 这是自定义报告器的示例：
 
-```ts
-// ./custom-reporter.js
+```ts [custom-reporter.js]
 import { BaseReporter } from 'vitest/reporters'
 
 export default class CustomReporter extends BaseReporter {
@@ -32,8 +31,7 @@ export default class CustomReporter extends BaseReporter {
 
 或者实现 `Reporter` 接口：
 
-```ts
-// ./custom-reporter.js
+```ts [custom-reporter.js]
 import { Reporter } from 'vitest/reporters'
 
 export default class CustomReporter implements Reporter {
@@ -45,7 +43,7 @@ export default class CustomReporter implements Reporter {
 
 然后你可以在 `vitest.config.ts` 文件中使用自定义报告器：
 
-```ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 import CustomReporter from './custom-reporter.js'
 

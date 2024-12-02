@@ -133,16 +133,18 @@ expect(fn.mock.results[1].value).toBe('world')
 
 Vitest 支持 [happy-dom](https://github.com/capricorn86/happy-dom) 或 [jsdom](https://github.com/jsdom/jsdom) 来模拟 DOM 和浏览器 API。Vitest 并不内置它们，所以你可能需要安装：
 
-```bash
+::: code-group
+```bash [happy-dom]
 $ npm i -D happy-dom
-# or
+```
+```bash [jsdom]
 $ npm i -D jsdom
 ```
+:::
 
 然后，更改 `environment` 配置文件中的选项：
 
-```ts
-// vitest.config.ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
@@ -157,7 +159,7 @@ export default defineConfig({
 
 Vitest 通过 [`v8`](https://v8.dev/blog/javascript-code-coverage) 支持原生代码覆盖率，通过 [`istanbul`](https://istanbul.js.org/) 支持检测代码覆盖率。
 
-```json
+```json [package.json]
 {
   "scripts": {
     "test": "vitest",
@@ -188,8 +190,12 @@ Vitest 还提供了一种方式，可以运行与你的代码实现放在一起�
 
 这使得测试与实现共享相同的闭包，并且能够在不导出的情况下针对私有状态进行测试。同时，它也使开发更加接近反馈循环。
 
+<<<<<<< HEAD
 ```ts
 // src/index.ts
+=======
+```ts [src/index.ts]
+>>>>>>> 0d4891929551e0729da0cfca5fe6e8297dd918e9
 // the implementation
 export function add(...args: number[]): number {
   return args.reduce((a, b) => a + b, 0)
@@ -211,7 +217,7 @@ if (import.meta.vitest) {
 
 你可以使用 [`bench`](/api/#bench) 运行基准测试通过 [Tinybench](https://github.com/tinylibs/tinybench) 函数来比较基准测试结果。
 
-```ts
+```ts [sort.bench.ts]
 import { bench, describe } from 'vitest'
 
 describe('sort', () => {
@@ -238,7 +244,7 @@ describe('sort', () => {
 
 你可以 [编写测试](/guide/testing-types) 来捕获类型回归。 Vitest 附带 [`expect-type`](https://github.com/mmkal/expect-type) 包，为你提供类似且易于理解的 API。
 
-```ts
+```ts [types.test-d.ts]
 import { assertType, expectTypeOf, test } from 'vitest'
 import { mount } from './mount.js'
 
@@ -268,7 +274,7 @@ vitest --merge-reports --reporter=junit --coverage.reporter=text
 
 Vitest 只从 `.env` 文件中自动加载以 `VITE_` 为前缀的环境变量，以保持与前端相关测试的兼容性，并遵守 [Vite 的既定惯例](https://vitejs.dev/guide/env-and-mode.html#env-files)。要从 `.env` 文件加载所有环境变量，可以使用从 `vite` 导入的 `loadEnv` 方法：
 
-```ts
+```ts [vitest.config.ts]
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
 
