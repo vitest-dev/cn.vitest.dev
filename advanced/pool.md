@@ -14,7 +14,7 @@ Vitest 在默认情况下以多种方式运行测试：
 
 你可以通过指定文件路径来提供自己的池：
 
-```ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -27,11 +27,35 @@ export default defineConfig({
         customProperty: true,
       },
     },
+<<<<<<< HEAD
     // 还可以为文件子集指定池
     poolMatchGlobs: [['**/*.custom.test.ts', './my-custom-pool.ts']],
+=======
   },
 })
 ```
+
+If you need to run tests in different pools, use the [workspace](/guide/workspace) feature:
+
+```ts [vitest.config.ts]
+export default defineConfig({
+  test: {
+    workspace: [
+      {
+        extends: true,
+        test: {
+          pool: 'threads',
+        },
+      },
+    ],
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
+  },
+})
+```
+
+::: info
+The `workspace` field was introduced in Vitest 2.2. To define a workspace in Vitest <2.2, create a separate `vitest.workspace.ts` file.
+:::
 
 ## API
 

@@ -32,7 +32,11 @@ Vitest 捆绑了 [`@testing-library/jest-dom`](https://github.com/testing-librar
 - [`toHaveRole`](https://github.com/testing-library/jest-dom#toHaveRole)
 - [`toHaveErrorMessage`](https://github.com/testing-library/jest-dom#toHaveErrorMessage)
 
+<<<<<<< HEAD
 如果我们正在使用 [TypeScript](/guide/browser/#typescript) 或者希望在 `expect` 中有正确的类型提示，请确保我们的 [setup 文件](/config/#setupfile)或 [config 文件](/config/file)中引用了 `@vitest/browser/providers/playwright` 或 `@vitest/browser/providers/webdriverio` ，具体取决于我们使用的提供者。如果使用的是默认的 `preview` 提供，可以改为 `@vitest/browser/matchers` 。
+=======
+If you are using [TypeScript](/guide/browser/#typescript) or want to have correct type hints in `expect`, make sure you have either `@vitest/browser/providers/playwright` or `@vitest/browser/providers/webdriverio` referenced in your [setup file](/config/#setupfile) or a [config file](/config/) depending on the provider you use. If you use the default `preview` provider, you can specify `@vitest/browser/matchers` instead.
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 
 ::: code-group
 ```ts [preview]

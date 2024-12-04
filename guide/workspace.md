@@ -156,8 +156,7 @@ export default defineConfig({
 
 工作区项目不支持所有配置属性。为了提高类型安全性，请在项目配置文件中使用 `defineProject` 方法而不是 `defineConfig` 方法：
 
-:::code-group
-```ts [packages/a/vitest.config.ts] twoslash
+```ts twoslash [packages/a/vitest.config.ts]
 // @errors: 2769
 import { defineProject } from 'vitest/config'
 
@@ -170,14 +169,17 @@ export default defineProject({
   },
 })
 ```
+<<<<<<< HEAD
 
 :::
+=======
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 
 ## 运行测试
 
 要在工作区内运行测试，请在根目录 `package.json` 中定义一个脚本：
 
-```json
+```json [package.json]
 {
   "scripts": {
     "test": "vitest"
@@ -246,7 +248,6 @@ bun test --project e2e --project unit
 
 没有任何配置选项从根级别的配置文件继承。你可以创建一个共享的配置文件，并将其与项目配置文件合并：
 
-::: code-group
 ```ts [packages/a/vitest.config.ts]
 import { defineProject, mergeConfig } from 'vitest/config'
 import configShared from '../vitest.shared.js'
@@ -260,8 +261,11 @@ export default mergeConfig(
   })
 )
 ```
+<<<<<<< HEAD
 
 :::
+=======
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 
 此外，在 `defineWorkspace` 层级，您可以使用 `extends` 选项来继承根级别的配置。所有选项将被合并。
 

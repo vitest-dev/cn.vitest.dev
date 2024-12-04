@@ -130,7 +130,7 @@ expect.addSnapshotSerializer({
 
 我们还支持 [snapshotSerializers](/config/#snapshotserializers) 选项来隐式添加自定义序列化器。
 
-```ts
+```ts [path/to/custom-serializer.ts]
 import { SnapshotSerializer } from 'vitest'
 
 export default {
@@ -144,8 +144,8 @@ export default {
 } satisfies SnapshotSerializer
 ```
 
-```ts
-import { defineConfig } from 'vite'
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
@@ -229,8 +229,9 @@ test('snapshot', () => {
 
 我们相信这种预设有更好的可读性和开发体验。如果你仍然喜欢 Jest 的行为，可以通过以下方式更改配置：
 
-```ts
-// vitest.config.js
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
+
 export default defineConfig({
   test: {
     snapshotFormat: {

@@ -15,10 +15,15 @@ Vitest 还提供了一种方式，可以运行与你的代码实现放在一起�
 
 首先，在 `if (import.meta.vitest)` 代码块内写一些测试代码并放在文件的末尾，例如:
 
+<<<<<<< HEAD
 ```ts
 // src/index.ts
 
 // 函数实现
+=======
+```ts [src/index.ts]
+// the implementation
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 export function add(...args: number[]) {
   return args.reduce((a, b) => a + b, 0)
 }
@@ -36,8 +41,7 @@ if (import.meta.vitest) {
 
 更新 Vitest 配置文件内的 `includeSource` 以获取到 `src/` 下的文件：
 
-```ts
-// vitest.config.ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -57,8 +61,7 @@ $ npx vitest
 
 对于生产环境的构建，你需要设置配置文件内的 `define` 选项，让打包器清除无用的代码。例如，在 Vite 中
 
-```ts
-// vitest.config.ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -74,11 +77,8 @@ export default defineConfig({
 
 ### 其他的打包器
 
-<details mt4>
-<summary text-xl>unbuild</summary>
-
-```ts
-// build.config.ts
+::: details unbuild
+```ts [build.config.ts]
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
@@ -90,15 +90,15 @@ export default defineBuildConfig({
 })
 ```
 
+<<<<<<< HEAD
 了解更多：[unbuild](https://github.com/unjs/unbuild)
+=======
+Learn more: [unbuild](https://github.com/unjs/unbuild)
+:::
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 
-</details>
-
-<details my2>
-<summary text-xl>Rollup</summary>
-
-```ts
-// rollup.config.js
+::: details Rollup
+```ts [rollup.config.js]
 import replace from '@rollup/plugin-replace' // [!code ++]
 
 export default {
@@ -112,16 +112,20 @@ export default {
 }
 ```
 
+<<<<<<< HEAD
 了解更多：[Rollup](https://rollupjs.org/)
 
 </details>
+=======
+Learn more: [Rollup](https://rollupjs.org/)
+:::
+>>>>>>> 23d80038c071def3cea559ace9d597527738ef1a
 
 ## TypeScript
 
 要获得对 `import.meta.vitest` 的 TypeScript 支持，添加 `vitest/importMeta` 到 `tsconfig.json`:
 
-```json
-// tsconfig.json
+```json [tsconfig.json]
 {
   "compilerOptions": {
     "types": [
