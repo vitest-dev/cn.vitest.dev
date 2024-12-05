@@ -967,7 +967,9 @@ Vitest 通过 CLI 标志 [`--sequence.shuffle`](/guide/cli) 或配置选项 [`se
 ```ts
 import { describe, test } from 'vitest'
 
+// or describe('suite', { shuffle: true }, ...)
 describe.shuffle('suite', () => {
+<<<<<<< HEAD
   test('random test 1', async () => {
     /* ... */
   })
@@ -976,6 +978,22 @@ describe.shuffle('suite', () => {
   })
   test('random test 3', async () => {
     /* ... */
+=======
+  test('random test 1', async () => { /* ... */ })
+  test('random test 2', async () => { /* ... */ })
+  test('random test 3', async () => { /* ... */ })
+
+  // `shuffle` is inherited
+  describe('still random', () => {
+    test('random 4.1', async () => { /* ... */ })
+    test('random 4.2', async () => { /* ... */ })
+  })
+
+  // disable shuffle inside
+  describe('not random', { shuffle: false }, () => {
+    test('in order 5.1', async () => { /* ... */ })
+    test('in order 5.2', async () => { /* ... */ })
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
   })
 })
 // order depends on sequence.seed option in config (Date.now() by default)
@@ -1181,7 +1199,11 @@ Vitest 提供了一些 hooks，你可以在 _测试执行期间_ 调用这些钩
 
 ### onTestFinished {#ontestfinished}
 
+<<<<<<< HEAD
 这个 hook 总是在测试运行结束后调用。它在 `afterEach` 之后被调用，因为它们会影响测试结果。它接收一个包含当前测试结果的 `TaskResult` 。
+=======
+This hook is always called after the test has finished running. It is called after `afterEach` hooks since they can influence the test result. It receives an `ExtendedContext` object like `beforeEach` and `afterEach`.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 ```ts {1,5}
 import { onTestFinished, test } from 'vitest'
@@ -1235,7 +1257,11 @@ test('performs an organization query', async () => {
 
 ### onTestFailed
 
+<<<<<<< HEAD
 只有在测试失败后才会调用这个 hook 。它在 `afterEach` 之后被调用，因为它们会影响测试结果。它将接收一个包含当前测试结果的 `TaskResult` 。这个 hook 对调试非常有用。
+=======
+This hook is called only after the test has failed. It is called after `afterEach` hooks since they can influence the test result. It receives an `ExtendedContext` object like `beforeEach` and `afterEach`. This hook is useful for debugging.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 ```ts {1,5-7}
 import { onTestFailed, test } from 'vitest'

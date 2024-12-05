@@ -7,6 +7,10 @@ outline: deep
 
 此页面提供有关 Vitest API 中实验性浏览器模式功能的信息，该功能允许你在浏览器中本地运行测试，提供对窗口和文档等浏览器全局变量的访问。此功能目前正在开发中，API 未来可能会更改。
 
+::: tip
+If you are looking for documentation for `expect`, `vi` or any general API like workspaces or type testing, refer to the ["Getting Started" guide](/guide/).
+:::
+
 <img alt="Vitest UI" img-light src="/ui-browser-1-light.png">
 <img alt="Vitest UI" img-dark src="/ui-browser-1-dark.png">
 
@@ -51,8 +55,12 @@ bun add -D vitest @vitest/browser
 ::: warning
 不过，要在 CI 中运行测试，您需要安装 [`playwright`](https://npmjs.com/package/playwright) 或 [`webdriverio`](https://www.npmjs.com/package/webdriverio) 。我们还建议在本地测试时切换到这两个选项中的一个，而不是使用默认的 `preview` 提供程序，因为它依赖于模拟事件而不是使用 Chrome DevTools 协议。
 
+<<<<<<< HEAD
 如果你还没有使用这些工具中的一种，我们建议您从 Playwright 开始，因为它支持并行执行，这将使您的测试运行得更快。此外，Playwright 使用的 Chrome DevTools 协议通常比 WebDriver 更快。
 :::
+=======
+If you don't already use one of these tools, we recommend starting with Playwright because it supports parallel execution, which makes your tests run faster. Additionally, Playwright uses [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) which is generally faster than WebDriver.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 ::: tabs key:provider
 == Playwright
@@ -94,7 +102,8 @@ bun add -D vitest @vitest/browser webdriverio
 
 要在 Vitest 配置中激活浏览器模式，可以使用 `--browser` 标志，或在 Vitest 配置文件中将 `browser.enabled` 字段设为 `true`。下面是一个使用浏览器字段的配置示例：
 
-```ts
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     browser: {
@@ -115,6 +124,21 @@ Vitest 默认分配端口号 `63315` 以避免与开发服务器冲突，允许�
 如果之前未使用过 Vite，请确保已安装框架插件并在配置中指定。有些框架可能需要额外配置才能运行，请查看其 Vite 相关文档以确定。
 
 ::: code-group
+```ts [react]
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      name: 'chromium',
+    }
+  }
+})
+```
 ```ts [vue]
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
@@ -177,16 +201,19 @@ export default defineConfig({
 ```
 :::
 
+<<<<<<< HEAD
 ::: tip
 `react` 不需要插件就能工作，但 `preact` 需要 [extra configuration](https://preactjs.com/guide/v10/getting-started/#create-a-vite-powered-preact-app) 才能使用别名
 :::
 
 如果需要使用基于 Node 的运行程序运行某些测试，可以定义一个 [workspace](/guide/workspace) 文件，为不同的测试策略分别配置：
+=======
+If you need to run some tests using Node-based runner, you can define a [workspace](/guide/workspace) file with separate configurations for different testing strategies:
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 {#workspace-config}
 
-```ts
-// vitest.workspace.ts
+```ts [vitest.workspace.ts]
 import { defineWorkspace } from 'vitest/config'
 
 export default defineWorkspace([
@@ -226,7 +253,7 @@ export default defineWorkspace([
 == Playwright
 你可以通过 [`providerOptions`](/config/#browser-provideroptions)字段配置 Vitest 如何 [启动浏览器](https://playwright.dev/docs/api/class-browsertype#browser-type-launch) 和创建 [页面上下文](https://playwright.dev/docs/api/class-browsercontext)：
 
-```ts
+```ts [vitest.config.ts]
 export default defineConfig({
   test: {
     browser: {
@@ -283,7 +310,11 @@ Vitest 中的浏览器选项取决于provider。如果在配置文件中传递 `
 
 ## TypeScript
 
+<<<<<<< HEAD
 默认情况下，TypeScript 不识别 providers 选项和额外的 `expect` 属性。如果我们不使用任何 providers ，请确保在我们的测试、 [setup 文件](/config/#setupfile)或 [config 文件](/config/file)中引用了 `@vitest/browser/matchers` ，以便获取额外的 `expect` 定义。如果我们使用自定义 providers ，请确保在同一文件中添加 `@vitest/browser/providers/playwright` 或 `@vitest/browser/providers/webdriverio` ，以便 TypeScript 能够识别自定义选项的定义：
+=======
+By default, TypeScript doesn't recognize providers options and extra `expect` properties. If you don't use any providers, make sure the `@vitest/browser/matchers` is referenced somewhere in your tests, [setup file](/config/#setupfile) or a [config file](/config/) to pick up the extra `expect` definitions. If you are using custom providers, make sure to add `@vitest/browser/providers/playwright` or `@vitest/browser/providers/webdriverio` to the same file so TypeScript can pick up definitions for custom options:
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 ::: code-group
 ```ts [default]
@@ -354,11 +385,16 @@ npx vitest --browser.name=chrome --browser.headless
 
 headless 模式是浏览器模式下可用的另一个选项。在 headless 模式下，浏览器在没有用户界面的情况下在后台运行，这对于运行自动化测试非常有用。Vitest 中的 headless 选项可以设置为布尔值以启用或禁用 headless 模式。
 
+<<<<<<< HEAD
 使用 headless 模式时，Vitest 不会自动打开用户界面。如果想继续使用用户界面，但又想 headless 运行测试，可以安装 [`@vitest/ui`](/guide/ui) 包，并在运行 Vitest 时传递 --ui 标志。
+=======
+When using headless mode, Vitest won't open the UI automatically. If you want to continue using the UI but have tests run headlessly, you can install the [`@vitest/ui`](/guide/ui) package and pass the `--ui` flag when running Vitest.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 这是启用 headless 模式的示例配置：
 
-```ts
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     browser: {

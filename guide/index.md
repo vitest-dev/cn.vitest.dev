@@ -44,21 +44,33 @@ Vitest 需要 Vite >=v5.0.0 和 Node >=v18.0.0
 
 如果在 `package.json` 中安装一份 `vitest` 的副本，可以使用上面列出的方法之一。然而，如果更倾向于直接运行 `vitest` ，可以使用 `npx vitest`（ `npx` 是会随着 npm 和 Node.js 一起被安装）。
 
+<<<<<<< HEAD
 `npx` 将执行指定的命令。在默认情况下，`npx` 首先会检查命令是否存在于本地项目的 `node_modules/.bin` 中。如果没有找到，`npx` 将在系统的 $PATH 中查找并执行它。如果两个位置都没有找到命令，`npx` 将在执行前安装它。
+=======
+The `npx` tool will execute the specified command. By default, `npx` will first check if the command exists in the local project's binaries. If it is not found there, `npx` will look in the system's `$PATH` and execute it if found. If the command is not found in either location, `npx` will install it in a temporary location prior to execution.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 ## 编写测试
 
 例如，我们将编写一个简单的测试来验证将两个数字相加的函数的输出。
 
+<<<<<<< HEAD
 ```js
 // sum.js
+=======
+``` js [sum.js]
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 export function sum(a, b) {
   return a + b
 }
 ```
 
+<<<<<<< HEAD
 ```js
 // sum.test.js
+=======
+``` js [sum.test.js]
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 import { expect, test } from 'vitest'
 import { sum } from './sum.js'
 
@@ -68,12 +80,16 @@ test('adds 1 + 2 to equal 3', () => {
 ```
 
 ::: tip
+<<<<<<< HEAD
 一般情况下，执行测试的文件名中必须包含 ".test." 或 ".spec." 。
+=======
+By default, tests must contain `.test.` or `.spec.` in their file name.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 :::
 
 接下来，为了执行测试，请将以下部分添加到你的 `package.json` 文件中：
 
-```json
+```json [package.json]
 {
   "scripts": {
     "test": "vitest"
@@ -111,7 +127,7 @@ Vitest 支持与 Vite 相同的配置文件扩展名：`.js`、`.mjs`、`.cjs`�
 
 如果你不使用 Vite 作为构建工具，你可以使用配置文件中的 `test` 属性来配置 Vitest：
 
-```ts
+```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -127,7 +143,7 @@ export default defineConfig({
 
 如果你已经在使用 Vite，请在 Vite 配置中添加 `test` 属性。你还需要使用 [三斜杠指令](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) 在你的配置文件的顶部引用。
 
-```ts
+```ts [vite.config.ts]
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 
@@ -140,7 +156,7 @@ export default defineConfig({
 
 The `<reference types="vitest" />` 将在 Vitest 3 中停止工作，但您可以在 Vitest 2.1 中开始迁移到 `vitest/config`：
 
-```ts
+```ts [vite.config.ts]
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 
@@ -185,7 +201,7 @@ export default defineConfig({
 
 使用 [Vitest Workspaces](/guide/workspace) 在同一项目中运行不同的项目配置。你可以在`vitest.workspace`文件中定义工作区的文件和文件夹列表。该文件支持 `js` / `ts` / `json` 扩展名。此功能非常适合配合 monorepo 使用。
 
-```ts
+```ts [vitest.workspace.ts]
 import { defineWorkspace } from 'vitest/config'
 
 export default defineWorkspace([
@@ -220,7 +236,7 @@ export default defineWorkspace([
 在安装了 Vitest 的项目中，你可以在 npm 脚本中使用 `vitest` 脚本，或者直接使用 `npx vitest` 运行它。 以下是脚手架 Vitest 项目中的默认 npm 脚本：
 
 <!-- prettier-ignore -->
-```json
+```json [package.json]
 {
   "scripts": {
     "test": "vitest",

@@ -5,7 +5,52 @@ outline: deep
 
 # 迁移指南
 
+<<<<<<< HEAD
 ## 迁移到 Vitest 2.0
+=======
+## Migrating to Vitest 3.0
+
+### Test Options as a Third Argument
+
+Vitest 3.0 prints a warning if you pass down an object as a third argument to `test` or `describe` functions:
+
+```ts
+test('validation works', () => {
+  // ...
+}, { retry: 3 }) // [!code --]
+
+test('validation works', { retry: 3 }, () => { // [!code ++]
+  // ...
+})
+```
+
+Vitest 4.0 will throw an error if the third argument is an object. Note that the timeout number is not deprecated:
+
+```ts
+test('validation works', () => {
+  // ...
+}, 1000) // Ok ✅
+```
+
+### `Custom` Type is Deprecated <Badge type="warning">experimental API</Badge> {#custom-type-is-deprecated}
+
+The `Custom` type is now equal to the `Test` type. Note that Vitest updated the public types in 2.1 and changed exported names to `RunnerCustomCase` and `RunnerTestCase`:
+
+```ts
+import {
+  RunnerCustomCase, // [!code --]
+  RunnerTestCase, // [!code ++]
+} from 'vitest'
+```
+
+If you are using `getCurrentSuite().custom()`, the `type` of the returned task is now is equal to `'test'`. The `Custom` type will be removed in Vitest 4.
+
+### `onTestFinished` and `onTestFailed` Now Receive a Context
+
+The [`onTestFinished`](/api/#ontestfinished) and [`onTestFailed`](/api/#ontestfailed) hooks previously received a test result as the first argument. Now, they receive a test context, like `beforeEach` and `afterEach`.
+
+## Migrating to Vitest 2.0
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 
 ### 默认数据池为 `forks`
@@ -300,7 +345,19 @@ Jest 默认启用[全局 API](https://jestjs.io/zh-Hans/docs/api)。然而 Vites
 
 如果你决定禁用全局 API，请注意像 [`testing-library`](https://testing-library.com/) 这样的通用库不会自动运行 DOM [cleanup](https://testing-library.com/docs/svelte-testing-library/api/#cleanup)。
 
+<<<<<<< HEAD
 ### 模拟模块
+=======
+### `spy.mockReset`
+
+Jest's [`mockReset`](https://jestjs.io/docs/mock-function-api#mockfnmockreset) replaces the mock implementation with an
+empty function that returns `undefined`.
+
+Vitest's [`mockReset`](/api/mock#mockreset) resets the mock implementation to its original.
+That is, resetting a mock created by `vi.fn(impl)` will reset the mock implementation to `impl`.
+
+### Module Mocks
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 在 Jest 中模拟一个模块时，工厂参数的返回值是默认导出。在 Vitest 中，工厂参数必须返回一个明确定义了每个导出的对象。例如，下面的 `jest.mock` 必须更新如下：
 

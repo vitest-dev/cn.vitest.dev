@@ -200,7 +200,17 @@ await asyncMock() // throws Error<'Async error'>
 function mockReset(): MockInstance<T>
 ```
 
+<<<<<<< HEAD
 执行与 `mockClear` 相同的操作，并将内部实现设置为空函数（调用时返回 `undefined`）。这也将重置所有“一次性”实现。这对于完全将模拟对象重置为其默认状态非常有用。
+=======
+Does what `mockClear` does and resets inner implementation to the original function.
+This also resets all "once" implementations.
+
+Note that resetting a mock from `vi.fn()` will set implementation to an empty function that returns `undefined`.
+resetting a mock from `vi.fn(impl)` will restore implementation to `impl`.
+
+This is useful when you want to reset a mock to its original state.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 要在每个测试之前自动调用此方法，请在配置中启用 [`mockReset`](/config/#mockreset) 设置。
 
@@ -210,9 +220,16 @@ function mockReset(): MockInstance<T>
 function mockRestore(): MockInstance<T>
 ```
 
+<<<<<<< HEAD
 执行与 `mockReset` 相同的操作，并将内部实现恢复为原始函数。
 
 注意，恢复使用 `vi.fn()` 创建的模拟对象将把实现设置为返回 `undefined` 的空函数。恢复使用 `vi.fn(impl)` 创建的模拟对象将把实现恢复为 `impl`。
+=======
+Does what `mockReset` does and restores original descriptors of spied-on objects.
+
+Note that restoring a mock from `vi.fn()` will set implementation to an empty function that returns `undefined`.
+Restoring a mock from `vi.fn(impl)` will restore implementation to `impl`.
+>>>>>>> e35f3fa69f314a1d985a5c9a104038fe3fb3446f
 
 要在每个测试之前自动调用此方法，请在配置中启用 [`restoreMocks`](/config/#restoremocks) 设置。
 
