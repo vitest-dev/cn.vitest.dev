@@ -2538,7 +2538,7 @@ Expand all common lines.
 #### diff.printBasicPrototype
 
 - **Type**: `boolean`
-- **Default**: `true`
+- **Default**: `false`
 
 Print basic prototype `Object` and `Array` in diff output
 
