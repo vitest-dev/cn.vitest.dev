@@ -1488,7 +1488,30 @@ Vitest 会自动将测试文件的 `include` 模式添加到 `coverage.exclude` 
 
 #### coverage.thresholds
 
+<<<<<<< HEAD
 覆盖范围阈值选项
+=======
+Options for coverage thresholds.
+
+If a threshold is set to a positive number, it will be interpreted as the minimum percentage of coverage required. For example, setting the lines threshold to `90` means that 90% of lines must be covered.
+
+If a threshold is set to a negative number, it will be treated as the maximum number of uncovered items allowed. For example, setting the lines threshold to `-10` means that no more than 10 lines may be uncovered.
+
+<!-- eslint-skip -->
+```ts
+{
+  coverage: {
+    thresholds: {
+      // Requires 90% function coverage
+      functions: 90,
+
+      // Require that no more than 10 lines are uncovered
+      lines: -10,
+    }
+  }
+}
+```
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.lines
 
@@ -1496,8 +1519,12 @@ Vitest 会自动将测试文件的 `include` 模式添加到 `coverage.exclude` 
 - **可用的测试提供者:** `'v8' | 'istanbul'`
 - **命令行终端:** `--coverage.thresholds.lines=<number>`
 
+<<<<<<< HEAD
 lines 的全局阈值。
 更多信息请查看 [istanbul documentation](https://github.com/istanbuljs/nyc#coverage-thresholds)。
+=======
+Global threshold for lines.
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.functions
 
@@ -1505,8 +1532,12 @@ lines 的全局阈值。
 - **可用的测试提供者:** `'v8' | 'istanbul'`
 - **命令行终端:** `--coverage.thresholds.functions=<number>`
 
+<<<<<<< HEAD
 functions 的全局阈值。
 更多信息请查看 [istanbul documentation](https://github.com/istanbuljs/nyc#coverage-thresholds)。
+=======
+Global threshold for functions.
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.branches
 
@@ -1514,8 +1545,12 @@ functions 的全局阈值。
 - **可用的测试提供者:** `'v8' | 'istanbul'`
 - **命令行终端:** `--coverage.thresholds.branches=<number>`
 
+<<<<<<< HEAD
 branches 的全局阈值。
 更多信息请查看 [istanbul documentation](https://github.com/istanbuljs/nyc#coverage-thresholds)。
+=======
+Global threshold for branches.
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.statements
 
@@ -1523,8 +1558,12 @@ branches 的全局阈值。
 - **可用的测试提供者:** `'v8' | 'istanbul'`
 - **命令行终端:** `--coverage.thresholds.statements=<number>`
 
+<<<<<<< HEAD
 statements 的全局阈值。
 更多信息请查看 [istanbul documentation](https://github.com/istanbuljs/nyc#coverage-thresholds)。
+=======
+Global threshold for statements.
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.perFile
 
@@ -1542,8 +1581,13 @@ statements 的全局阈值。
 - **可用的测试提供者:** `'v8' | 'istanbul'`
 - **命令行终端:** `--coverage.thresholds.autoUpdate=<boolean>`
 
+<<<<<<< HEAD
 如果当前覆盖率高于配置的阈值时，将所有阈值 `lines` 、`functions` 、`branches` 和 `statements` 更新到配置文件中。
 此选项有助于在覆盖率提高时保持阈值不变。
+=======
+Update all threshold values `lines`, `functions`, `branches` and `statements` to configuration file when current coverage is better than the configured thresholds.
+This option helps to maintain thresholds when coverage is improved.
+>>>>>>> 8cc758a7da47787cd5fea197e8abc02f6d9214b3
 
 ##### coverage.thresholds.100
 
