@@ -1763,8 +1763,9 @@ test('doNotRun', () => {
 
 提供 API 服务的端口。当设置为 true 时，默认端口为 51204
 
-### browser {#browser}
+### browser <Badge type="warning">experimental</Badge> {#browser}
 
+<<<<<<< HEAD
 - **类型:** `{ enabled?, name?, provider?, headless?, api? }`
 - **默认值:** `{ enabled: false, headless: process.env.CI, api: 63315 }`
 - **命令行终端:** `--browser`, `--browser=<name>`, `--browser.name=chrome --browser.headless`
@@ -1774,11 +1775,18 @@ test('doNotRun', () => {
 ::: tip NOTE
 在 [指南页面](/guide/browser/) 中阅读有关在真实浏览器中进行测试的更多信息。
 :::
+=======
+- **Default:** `{ enabled: false }`
+- **CLI:** `--browser=<name>`, `--browser.name=chrome --browser.headless`
+
+Configuration for running browser tests. Please, refer to the ["Browser Config Reference"](/guide/browser/config) article.
+>>>>>>> 1f025191f0952a086933884f3d6499b0e696ebf2
 
 ::: warning
 这是一项实验性功能。重大更改可能不会遵循 semver，请在使用时锁定 Vitest 的版本。
 :::
 
+<<<<<<< HEAD
 #### browser.enabled
 
 - **类型:** `boolean`
@@ -1982,6 +1990,8 @@ export interface BrowserScript {
 
 自定义[命令](/guide/browser/commands)，可在浏览器测试期间从 `@vitest/browser/commands` 导入。
 
+=======
+>>>>>>> 1f025191f0952a086933884f3d6499b0e696ebf2
 ### clearMocks
 
 - **类型:** `boolean`
