@@ -207,14 +207,14 @@ export default ({ mode }: { mode: string }) => {
             collapsed: false,
             items: [
               {
-                text: 'Why Browser Mode',
+                text: '为什么是浏览器模式',
                 link: '/guide/browser/why',
-                docFooterText: 'Why Browser Mode | Browser Mode',
+                docFooterText: '为什么是浏览器模式 | 浏览器模式',
               },
               {
-                text: 'Getting Started',
+                text: '快速起步',
                 link: '/guide/browser/',
-                docFooterText: 'Getting Started | Browser Mode',
+                docFooterText: '快速起步 | 浏览器模式',
               },
             ],
           },
@@ -225,27 +225,27 @@ export default ({ mode }: { mode: string }) => {
               {
                 text: 'Context API',
                 link: '/guide/browser/context',
-                docFooterText: 'Context API | Browser Mode',
+                docFooterText: 'Context API | 浏览器模式',
               },
               {
                 text: 'Interactivity API',
                 link: '/guide/browser/interactivity-api',
-                docFooterText: 'Interactivity API | Browser Mode',
+                docFooterText: 'Interactivity API | 浏览器模式',
               },
               {
                 text: 'Locators',
                 link: '/guide/browser/locators',
-                docFooterText: 'Locators | Browser Mode',
+                docFooterText: 'Locators | 浏览器模式',
               },
               {
                 text: 'Assertion API',
                 link: '/guide/browser/assertion-api',
-                docFooterText: 'Assertion API | Browser Mode',
+                docFooterText: 'Assertion API | 浏览器模式',
               },
               {
                 text: 'Commands API',
                 link: '/guide/browser/commands',
-                docFooterText: 'Commands | Browser Mode',
+                docFooterText: 'Commands | 浏览器模式',
               },
             ],
           },
@@ -310,11 +310,11 @@ export default ({ mode }: { mode: string }) => {
           {
             items: [
               {
-                text: 'Browser Mode',
+                text: '浏览器模式',
                 link: '/guide/browser',
               },
               {
-                text: 'Advanced API',
+                text: '高级 API',
                 link: '/advanced/api',
               },
               {
