@@ -61,7 +61,11 @@ CDP session仅适用于 `playwright` provider，并且仅在使用 `chromium` �
 
 ## Custom Commands
 
+<<<<<<< HEAD
 你也可以通过 [`browser.commands`](/config/#browser-commands) 配置选项添加自己的命令。如果你开发了一个库，你可以通过插件内的 `config` 钩子来提供它们：
+=======
+You can also add your own commands via [`browser.commands`](/guide/browser/config#browser-commands) config option. If you develop a library, you can provide them via a `config` hook inside a plugin:
+>>>>>>> ad8972b35b240f2baee9909f2fec09db81c2ee8b
 
 ```ts
 import type { Plugin } from 'vitest/config'
