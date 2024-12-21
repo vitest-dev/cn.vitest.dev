@@ -3,7 +3,7 @@ title: Why Browser Mode | Browser Mode
 outline: deep
 ---
 
-# 什么是浏览器模式?
+# 为什么是浏览器模式?
 
 ## 动机
 

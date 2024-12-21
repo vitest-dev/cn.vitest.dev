@@ -95,11 +95,7 @@ bun add -D vitest @vitest/browser webdriverio
 
 ## 配置
 
-<<<<<<< HEAD
-要在 Vitest 配置中激活浏览器模式，可以使用 `--browser` 标志，或在 Vitest 配置文件中将 `browser.enabled` 字段设为 `true`。下面是一个使用浏览器字段的配置示例：
-=======
-To activate browser mode in your Vitest configuration, you can use the `--browser=name` flag or set the `browser.enabled` field to `true` in your Vitest configuration file. Here is an example configuration using the browser field:
->>>>>>> ad8972b35b240f2baee9909f2fec09db81c2ee8b
+要在你的 Vitest 配置中激活浏览器模式，你可以使用 `--browser=name` 标志，或在 Vitest 配置文件中将 `browser.enabled` 字段设为 `true`。以下是一个使用浏览器字段的配置示例：
 
 ```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
@@ -253,59 +249,7 @@ export default defineWorkspace([
 ])
 ```
 
-<<<<<<< HEAD
-### Provider 配置
-
-:::tabs key:provider
-== Playwright
-你可以通过 [`providerOptions`](/config/#browser-provideroptions)字段配置 Vitest 如何 [启动浏览器](https://playwright.dev/docs/api/class-browsertype#browser-type-launch) 和创建 [页面上下文](https://playwright.dev/docs/api/class-browsercontext)：
-
-```ts [vitest.config.ts]
-export default defineConfig({
-  test: {
-    browser: {
-      providerOptions: {
-        launch: {
-          devtools: true,
-        },
-        context: {
-          geolocation: {
-            latitude: 45,
-            longitude: -30,
-          },
-          reducedMotion: 'reduce',
-        },
-      },
-    },
-  },
-})
-```
-== WebdriverIO
-
-你可以通过 [`providerOptions`](/config/#browser-provideroptions)字段配置 Vitest 在启动浏览器时应使用哪些 [options](https://webdriver.io/docs/configuration#webdriverio)：
-
-```ts
-export default defineConfig({
-  test: {
-    browser: {
-      browser: 'chrome',
-      providerOptions: {
-        region: 'eu',
-        capabilities: {
-          browserVersion: '27.0',
-          platformName: 'Windows 10',
-        },
-      },
-    },
-  },
-})
-```
-:::
-
 ## 浏览器选项类型
-=======
-## Browser Option Types
->>>>>>> ad8972b35b240f2baee9909f2fec09db81c2ee8b
 
 Vitest 中的浏览器选项取决于provider。如果在配置文件中传递 `--browser` 且未指定其名称，则 Vitest 将失败。可用选项：
 - `webdriverio` 支持这些浏览器:

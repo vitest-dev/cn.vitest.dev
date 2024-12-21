@@ -325,11 +325,7 @@ High and low watermarks for functions in the format of `<high>,<low>`
 - **CLI:** `--browser.name <name>`
 - **Config:** [browser.name](/guide/browser/config#browser-name)
 
-<<<<<<< HEAD
 在特定浏览器中运行所有测试。某些浏览器只适用于特定的 providers (比如 `--browser.provider`). 通过 [`browser.name`](https://vitest.dev/config/#browser-name) 查看更多信息
-=======
-Run all tests in a specific browser. Some browsers are only available for specific providers (see `--browser.provider`). Visit [`browser.name`](https://vitest.dev/guide/browser/config/#browser-name) for more information
->>>>>>> ad8972b35b240f2baee9909f2fec09db81c2ee8b
 
 ### browser.headless
 
