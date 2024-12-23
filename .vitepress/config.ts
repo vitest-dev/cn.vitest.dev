@@ -27,6 +27,7 @@ import { pwa } from './scripts/pwa'
 import { transformHead } from './scripts/transformHead'
 
 export default ({ mode }: { mode: string }) => {
+<<<<<<< HEAD
   return withPwa(
     defineConfig({
       lang: 'en-US',
@@ -36,6 +37,138 @@ export default ({ mode }: { mode: string }) => {
         root: {
           label: '简体中文',
           lang: 'zh',
+=======
+  return withPwa(defineConfig({
+    lang: 'en-US',
+    title: vitestName,
+    description: vitestDescription,
+    locales: {
+      root: {
+        label: 'English',
+        lang: 'en-US',
+      },
+      zh: {
+        label: '简体中文',
+        lang: 'zh',
+        link: 'https://cn.vitest.dev/',
+      },
+    },
+    head: [
+      ['meta', { name: 'theme-color', content: '#729b1a' }],
+      ['link', { rel: 'icon', href: '/favicon.ico', sizes: '48x48' }],
+      ['link', { rel: 'icon', href: '/logo.svg', sizes: 'any', type: 'image/svg+xml' }],
+      ['meta', { name: 'author', content: `${teamMembers.map(c => c.name).join(', ')} and ${vitestName} contributors` }],
+      ['meta', { name: 'keywords', content: 'vitest, vite, test, coverage, snapshot, react, vue, preact, svelte, solid, lit, marko, ruby, cypress, puppeteer, jsdom, happy-dom, test-runner, jest, typescript, esm, tinypool, tinyspy, node' }],
+      ['meta', { property: 'og:title', content: vitestName }],
+      ['meta', { property: 'og:description', content: vitestDescription }],
+      ['meta', { property: 'og:url', content: ogUrl }],
+      ['meta', { property: 'og:image', content: ogImage }],
+      ['meta', { name: 'twitter:title', content: vitestName }],
+      ['meta', { name: 'twitter:description', content: vitestDescription }],
+      ['meta', { name: 'twitter:image', content: ogImage }],
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+      ['link', { rel: 'preload', as: 'style', onload: 'this.onload=null;this.rel=\'stylesheet\'', href: font }],
+      ['noscript', {}, `<link rel="stylesheet" crossorigin="anonymous" href="${font}" />`],
+      ['link', { rel: 'mask-icon', href: '/logo.svg', color: '#ffffff' }],
+      ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
+    ],
+    lastUpdated: true,
+    vite: {
+      plugins: [
+        groupIconVitePlugin({
+          customIcon: {
+            'CLI': 'vscode-icons:file-type-shell',
+            'vitest.shims': 'vscode-icons:file-type-vitest',
+            'vitest.workspace': 'vscode-icons:file-type-vitest',
+            'vitest.config': 'vscode-icons:file-type-vitest',
+            '.spec.ts': 'vscode-icons:file-type-testts',
+            '.test.ts': 'vscode-icons:file-type-testts',
+            '.spec.js': 'vscode-icons:file-type-testjs',
+            '.test.js': 'vscode-icons:file-type-testjs',
+            'marko': 'vscode-icons:file-type-marko',
+          },
+        }),
+      ],
+    },
+    markdown: {
+      config(md) {
+        md.use(tabsMarkdownPlugin)
+        md.use(groupIconMdPlugin)
+      },
+      theme: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      codeTransformers: mode === 'development'
+        ? [transformerNotationWordHighlight()]
+        : [
+            transformerNotationWordHighlight(),
+            transformerTwoslash({
+              processHoverInfo: (info) => {
+                if (info.includes(process.cwd())) {
+                  return info.replace(new RegExp(process.cwd(), 'g'), '')
+                }
+                return info
+              },
+            }),
+          ],
+    },
+    themeConfig: {
+      logo: '/logo.svg',
+
+      editLink: {
+        pattern: 'https://github.com/vitest-dev/vitest/edit/main/docs/:path',
+        text: 'Suggest changes to this page',
+      },
+
+      search: {
+        provider: 'local',
+      /* provider: 'algolia',
+      options: {
+        appId: 'ZTF29HGJ69',
+        apiKey: '9c3ced6fed60d2670bb36ab7e8bed8bc',
+        indexName: 'vitest',
+        // searchParameters: {
+        //   facetFilters: ['tags:en'],
+        // },
+      }, */
+      },
+
+      carbonAds: {
+        code: 'CW7DVKJE',
+        placement: 'vitestdev',
+      },
+
+      socialLinks: [
+        { icon: 'bluesky', link: bluesky },
+        { icon: 'mastodon', link: mastodon },
+        { icon: 'discord', link: discord },
+        { icon: 'github', link: github },
+      ],
+
+      footer: {
+        message: 'Released under the MIT License.',
+        copyright: 'Copyright © 2021-PRESENT Anthony Fu, Matías Capeletto and Vitest contributors',
+      },
+
+      nav: [
+        { text: 'Guide & API', link: '/guide/', activeMatch: '^/(guide|api)/(?!browser)' },
+        { text: 'Config', link: '/config/', activeMatch: '^/config/' },
+        { text: 'Browser Mode', link: '/guide/browser', activeMatch: '^/guide/browser/' },
+        {
+          text: 'Resources',
+          items: [
+            {
+              text: 'Advanced API',
+              link: '/advanced/api/',
+              activeMatch: '^/advanced/',
+            },
+            {
+              text: 'Team',
+              link: '/team',
+            },
+          ],
+>>>>>>> 0c5c934f460d033f77ce924fb7f4a469a352d9e0
         },
         en: {
           label: 'English',
@@ -202,10 +335,80 @@ export default ({ mode }: { mode: string }) => {
             activeMatch: '^/guide/browser/',
           },
           {
+<<<<<<< HEAD
             text: '相关连接',
             items: [
               {
                 text: '高级 API',
+=======
+            text: 'Configuration',
+            collapsed: false,
+            items: [
+              {
+                text: 'Browser Config Reference',
+                link: '/guide/browser/config',
+                docFooterText: 'Browser Config Reference | Browser Mode',
+              },
+              {
+                text: 'Configuring Playwright',
+                link: '/guide/browser/playwright',
+                docFooterText: 'Configuring Playwright | Browser Mode',
+              },
+              {
+                text: 'Configuring WebdriverIO',
+                link: '/guide/browser/webdriverio',
+                docFooterText: 'Configuring WebdriverIO | Browser Mode',
+              },
+            ],
+          },
+          {
+            text: 'API',
+            collapsed: false,
+            items: [
+              {
+                text: 'Context API',
+                link: '/guide/browser/context',
+                docFooterText: 'Context API | Browser Mode',
+              },
+              {
+                text: 'Interactivity API',
+                link: '/guide/browser/interactivity-api',
+                docFooterText: 'Interactivity API | Browser Mode',
+              },
+              {
+                text: 'Locators',
+                link: '/guide/browser/locators',
+                docFooterText: 'Locators | Browser Mode',
+              },
+              {
+                text: 'Assertion API',
+                link: '/guide/browser/assertion-api',
+                docFooterText: 'Assertion API | Browser Mode',
+              },
+              {
+                text: 'Commands API',
+                link: '/guide/browser/commands',
+                docFooterText: 'Commands | Browser Mode',
+              },
+            ],
+          },
+          {
+            text: 'Guides',
+            collapsed: false,
+            items: [
+              {
+                text: 'Multiple Setups',
+                link: '/guide/browser/multiple-setups',
+                docFooterText: 'Multiple Setups | Browser Mode',
+              },
+            ],
+          },
+          {
+            items: [
+              ...footer(),
+              {
+                text: 'Node API Reference',
+>>>>>>> 0c5c934f460d033f77ce924fb7f4a469a352d9e0
                 link: '/advanced/api/',
                 activeMatch: '^/advanced/',
               },

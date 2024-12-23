@@ -316,77 +316,81 @@ High and low watermarks for functions in the format of `<high>,<low>`
 ### browser.enabled
 
 - **CLI:** `--browser.enabled`
-- **Config:** [browser.enabled](/config/#browser-enabled)
+- **Config:** [browser.enabled](/guide/browser/config#browser-enabled)
 
 在浏览器中运行测试。 相当于 `--browser.enabled` (默认值: `false`)
 
 ### browser.name
 
 - **CLI:** `--browser.name <name>`
-- **Config:** [browser.name](/config/#browser-name)
+- **Config:** [browser.name](/guide/browser/config#browser-name)
 
+<<<<<<< HEAD
 在特定浏览器中运行所有测试。某些浏览器只适用于特定的 providers (比如 `--browser.provider`). 通过 [`browser.name`](https://vitest.dev/config/#browser-name) 查看更多信息
+=======
+Run all tests in a specific browser. Some browsers are only available for specific providers (see `--browser.provider`). Visit [`browser.name`](https://vitest.dev/guide/browser/config/#browser-name) for more information
+>>>>>>> 0c5c934f460d033f77ce924fb7f4a469a352d9e0
 
 ### browser.headless
 
 - **CLI:** `--browser.headless`
-- **Config:** [browser.headless](/config/#browser-headless)
+- **Config:** [browser.headless](/guide/browser/config#browser-headless)
 
 在无头模式下运行浏览器（即不打开图形用户界面）。如果在 CI 中运行 Vitest，默认情况下将启用无头模式 (默认值: `process.env.CI`)
 
 ### browser.api.port
 
 - **CLI:** `--browser.api.port [port]`
-- **Config:** [browser.api.port](/config/#browser-api-port)
+- **Config:** [browser.api.port](/guide/browser/config#browser-api-port)
 
 指定服务器端口。注意，如果端口已被使用，Vite 会自动尝试下一个可用端口，因此这可能不是服务器最终监听的实际端口。如果为 `true`，将设置为 `63315`
 
 ### browser.api.host
 
 - **CLI:** `--browser.api.host [host]`
-- **Config:** [browser.api.host](/config/#browser-api-host)
+- **Config:** [browser.api.host](/guide/browser/config#browser-api-host)
 
 指定服务器应该监听哪些 IP 地址。设为 `0.0.0.0` 或 `true` 则监听所有地址，包括局域网地址和公共地址
 
 ### browser.api.strictPort
 
 - **CLI:** `--browser.api.strictPort`
-- **Config:** [browser.api.strictPort](/config/#browser-api-strictport)
+- **Config:** [browser.api.strictPort](/guide/browser/config#browser-api-strictport)
 
 设置为 true 时，如果端口已被使用，则退出，而不是自动尝试下一个可用端口
 
 ### browser.provider
 
 - **CLI:** `--browser.provider <name>`
-- **Config:** [browser.provider](/config/#browser-provider)
+- **Config:** [browser.provider](/guide/browser/config#browser-provider)
 
 用于运行浏览器测试的 Provider。某些浏览器只适用于特定的提供 Provider，可以是"webdriverio", "playwright", "preview"，或自定义 provider. 通过 [`browser.provider`](https://vitest.dev/config/#browser-provider) 查看更多信息 (默认值: `"preview"`)
 
 ### browser.providerOptions
 
 - **CLI:** `--browser.providerOptions <options>`
-- **Config:** [browser.providerOptions](/config/#browser-provideroptions)
+- **Config:** [browser.providerOptions](/guide/browser/config#browser-provideroptions)
 
 传递给浏览器提供程序的选项。更多信息请访问 [`browser.providerOptions`](https://vitest.dev/config/#browser-provideroptions)。
 
 ### browser.isolate
 
 - **CLI:** `--browser.isolate`
-- **Config:** [browser.isolate](/config/#browser-isolate)
+- **Config:** [browser.isolate](/guide/browser/config#browser-isolate)
 
 隔离运行每个浏览器测试文件。要禁用隔离请使用 `--browser.isolate=false` (默认值: `true`)
 
 ### browser.ui
 
 - **CLI:** `--browser.ui`
-- **Config:** [browser.ui](/config/#browser-ui)
+- **Config:** [browser.ui](/guide/browser/config#browser-ui)
 
 运行测试时显示 Vitest UI(默认值: `!process.env.CI`)
 
 ### browser.fileParallelism
 
 - **CLI:** `--browser.fileParallelism`
-- **Config:** [browser.fileParallelism](/config/#browser-fileparallelism)
+- **Config:** [browser.fileParallelism](/guide/browser/config#browser-fileparallelism)
 
 浏览器测试文件是否应并行运行。使用 `--browser.fileParallelism=false` 可禁用 (默认值: `true`)
 
