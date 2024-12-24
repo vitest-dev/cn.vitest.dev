@@ -95,7 +95,11 @@ bun add -D vitest @vitest/browser webdriverio
 
 ## 配置
 
+<<<<<<< HEAD
 要在 Vitest 配置中激活浏览器模式，可以使用 `--browser` 标志，或在 Vitest 配置文件中将 `browser.enabled` 字段设为 `true`。下面是一个使用浏览器字段的配置示例：
+=======
+To activate browser mode in your Vitest configuration, you can use the `--browser=name` flag or set the `browser.enabled` field to `true` in your Vitest configuration file. Here is an example configuration using the browser field:
+>>>>>>> a846195377cb7746f3b7572999425757c7dcae53
 
 ```ts [vitest.config.ts]
 import { defineConfig } from 'vitest/config'
@@ -104,7 +108,10 @@ export default defineConfig({
     browser: {
       provider: 'playwright', // or 'webdriverio'
       enabled: true,
-      name: 'chromium', // browser name is required
+      // at least one instance is required
+      instances: [
+        { browser: 'chromium' },
+      ],
     },
   }
 })
@@ -129,7 +136,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
+      instances: [
+        { browser: 'chromium' },
+      ],
     }
   }
 })
@@ -144,7 +153,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
+      instances: [
+        { browser: 'chromium' },
+      ],
     }
   }
 })
@@ -159,7 +170,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
+      instances: [
+        { browser: 'chromium' },
+      ],
     }
   }
 })
@@ -174,7 +187,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
+      instances: [
+        { browser: 'chromium' },
+      ],
     }
   }
 })
@@ -189,7 +204,9 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
+      instances: [
+        { browser: 'chromium' },
+      ],
     }
   }
 })
@@ -227,13 +244,16 @@ export default defineWorkspace([
       name: 'browser',
       browser: {
         enabled: true,
-        name: 'chrome',
+        instances: [
+          { browser: 'chromium' },
+        ],
       },
     },
   },
 ])
 ```
 
+<<<<<<< HEAD
 ### Provider 配置
 
 :::tabs key:provider
@@ -283,6 +303,9 @@ export default defineConfig({
 :::
 
 ## 浏览器选项类型
+=======
+## Browser Option Types
+>>>>>>> a846195377cb7746f3b7572999425757c7dcae53
 
 Vitest 中的浏览器选项取决于provider。如果在配置文件中传递 `--browser` 且未指定其名称，则 Vitest 将失败。可用选项：
 - `webdriverio` 支持这些浏览器:
@@ -359,7 +382,7 @@ npx vitest --browser=chrome
 或者你可以使用点符号向 CLI 提供浏览器选项：
 
 ```sh
-npx vitest --browser.name=chrome --browser.headless
+npx vitest --browser.headless
 ```
 
 默认情况下，Vitest 会自动打开浏览器用户界面进行开发。您的测试将在中间的 iframe 中运行。您可以通过选择首选尺寸、在测试中调用 `page.viewport` 或在 [the config](/config/#browser-viewport) 中设置默认值来配置视口。
@@ -388,7 +411,7 @@ export default defineConfig({
 你还可以在 CLI 中使用 `--browser.headless` 标志设置 headless 模式，如下所示：
 
 ```sh
-npx vitest --browser.name=chrome --browser.headless
+npx vitest --browser.headless
 ```
 
 在这种情况下，Vitest 将使用 Chrome 浏览器以 headless 模式运行。
