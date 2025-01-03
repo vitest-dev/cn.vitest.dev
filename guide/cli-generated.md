@@ -390,6 +390,13 @@ High and low watermarks for functions in the format of `<high>,<low>`
 
 浏览器测试文件是否应并行运行。使用 `--browser.fileParallelism=false` 可禁用 (默认值: `true`)
 
+### browser.connectTimeout
+
+- **CLI:** `--browser.connectTimeout <timeout>`
+- **Config:** [browser.connectTimeout](/guide/browser/config#browser-connecttimeout)
+
+If connection to the browser takes longer, the test suite will fail (default: `60_000`)
+
 ### pool
 
 - **CLI:** `--pool <pool>`
@@ -654,14 +661,22 @@ VM forks pool 的内存限制。如果你观察到内存泄漏问题，可以尝
 - **CLI:** `--testTimeout <timeout>`
 - **Config:** [testTimeout](/config/#testtimeout)
 
+<<<<<<< HEAD
 测试的默认超时（毫秒）（默认值：`5000`）。
+=======
+Default timeout of a test in milliseconds (default: `5000`). Use `0` to disable timeout completely.
+>>>>>>> 8cbb78973d904765368bc077f6a84232606691a5
 
 ### hookTimeout
 
 - **CLI:** `--hookTimeout <timeout>`
 - **Config:** [hookTimeout](/config/#hooktimeout)
 
+<<<<<<< HEAD
 默认钩子超时（以毫秒为单位）（默认值：`10000`）
+=======
+Default hook timeout in milliseconds (default: `10000`). Use `0` to disable timeout completely.
+>>>>>>> 8cbb78973d904765368bc077f6a84232606691a5
 
 ### bail
 

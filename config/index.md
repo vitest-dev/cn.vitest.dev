@@ -1073,7 +1073,11 @@ export default defineConfig({
 - **默认值:** `5_000` in Node.js, `15_000` if `browser.enabled` is `true`
 - **命令行终端:** `--test-timeout=5000`, `--testTimeout=5000`
 
+<<<<<<< HEAD
 测试的默认超时时间（以毫秒为单位）。
+=======
+Default timeout of a test in milliseconds. Use `0` to disable timeout completely.
+>>>>>>> 8cbb78973d904765368bc077f6a84232606691a5
 
 ### hookTimeout
 
@@ -1081,7 +1085,11 @@ export default defineConfig({
 - **默认值:** `10_000` in Node.js, `30_000` if `browser.enabled` is `true`
 - **命令行终端:** `--hook-timeout=10000`, `--hookTimeout=10000`
 
+<<<<<<< HEAD
 钩子(hook)的默认超时时间（以毫秒为单位）。
+=======
+Default timeout of a hook in milliseconds. Use `0` to disable timeout completely.
+>>>>>>> 8cbb78973d904765368bc077f6a84232606691a5
 
 ### teardownTimeout<NonProjectOption />
 
