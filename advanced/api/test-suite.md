@@ -10,6 +10,7 @@ if (task.type === 'suite') {
 }
 ```
 
+<<<<<<< HEAD
 ::: warning
 我们计划引入一个新的 Reporter API，默认将使用此 API。目前，Reporter API 使用 [runner tasks](/advanced/runner#tasks)，但你仍然可以通过 `vitest.state.getReportedEntity` 方法访问 `TestSuite`：
 
@@ -35,6 +36,8 @@ class Reporter {
 ```
 :::
 
+=======
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 ## project
 
 这引用了测试所属的 [`TestProject`](/advanced/api/test-project)。
@@ -125,12 +128,13 @@ describe('the validation works correctly', () => {
 
 ```ts
 interface TaskOptions {
-  each: boolean | undefined
-  concurrent: boolean | undefined
-  shuffle: boolean | undefined
-  retry: number | undefined
-  repeats: number | undefined
-  mode: 'run' | 'only' | 'skip' | 'todo'
+  readonly each: boolean | undefined
+  readonly fails: boolean | undefined
+  readonly concurrent: boolean | undefined
+  readonly shuffle: boolean | undefined
+  readonly retry: number | undefined
+  readonly repeats: number | undefined
+  readonly mode: 'run' | 'only' | 'skip' | 'todo'
 }
 ```
 
@@ -153,7 +157,25 @@ for (const task of suite.children) {
 ```
 
 ::: warning
+<<<<<<< HEAD
 请注意，`suite.children` 只会迭代第一层嵌套，不会深入更多层次。
+=======
+Note that `suite.children` will only iterate the first level of nesting, it won't go deeper. If you need to iterate over all tests or suites, use [`children.allTests()`](/advanced/api/test-collection#alltests) or [`children.allSuites()`](/advanced/api/test-collection#allsuites). If you need to iterate over everything, use recursive function:
+
+```ts
+function visit(collection: TestCollection) {
+  for (const task of collection) {
+    if (task.type === 'suite') {
+      // report a suite
+      visit(task.children)
+    }
+    else {
+      // report a test
+    }
+  }
+}
+```
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 :::
 
 ## ok
@@ -164,13 +186,26 @@ function ok(): boolean
 
 检查套件中是否有任何失败的测试。如果套件在收集过程中失败，这也将返回 `false`。在这种情况下，请检查 [`errors()`](#errors) 以获取抛出的错误。
 
-## skipped
+## state
 
 ```ts
-function skipped(): boolean
+function state(): TestSuiteState
 ```
 
+<<<<<<< HEAD
 检查套件在收集过程中是否被跳过。
+=======
+Checks the running state of the suite. Possible return values:
+
+- **pending**: the tests in this suite did not finish running yet.
+- **failed**: this suite has failed tests or they couldn't be collected. If [`errors()`](#errors) is not empty, it means the suite failed to collect tests.
+- **passed**: every test inside this suite has passed.
+- **skipped**: this suite was skipped during collection.
+
+::: warning
+Note that [test module](/advanced/api/test-module) also has a `state` method that returns the same values, but it can also return an additional `queued` state if the module wasn't executed yet.
+:::
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 
 ## errors
 
@@ -189,5 +224,9 @@ describe('collection failed', () => {
 ```
 
 ::: warning
+<<<<<<< HEAD
 请注意，错误被序列化为简单对象：`instanceof Error` 始终返回 `false`。
+=======
+Note that errors are serialized into simple objects: `instanceof Error` will always return `false`.
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 :::

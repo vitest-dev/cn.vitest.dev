@@ -81,6 +81,10 @@ import {
 
 此函数不用于内部，仅作为公共 API 暴露。
 
+### Cleaned up `vitest/reporters` types <Badge type="danger">API</Badge> {#cleaned-up-vitest-reporters-types}
+
+The `vitest/reporters` entrypoint now only exports reporters implementations and options types. If you need access to `TestCase`/`TestSuite` and other task related types, import them additionally from `vitest/node`.
+
 ## Migrating to Vitest 2.0 {#vitest-2}
 
 ### 默认数据池为 `forks`

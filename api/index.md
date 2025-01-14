@@ -1237,7 +1237,21 @@ test('performs an organization query', async () => {
 ```
 
 ::: tip
+<<<<<<< HEAD
 该钩子总是以相反顺序调用，不受 [`sequence.hooks`](/config/#sequence-hooks) 选项的影响。
+=======
+This hook is always called in reverse order and is not affected by [`sequence.hooks`](/config/#sequence-hooks) option.
+
+<!-- TODO: should it be called? https://github.com/vitest-dev/vitest/pull/7069 -->
+Note that this hook is not called if test was skipped with a dynamic `ctx.skip()` call:
+
+```ts{2}
+test('skipped dynamically', (t) => {
+  onTestFinished(() => {}) // not called
+  t.skip()
+})
+```
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 :::
 
 ### onTestFailed

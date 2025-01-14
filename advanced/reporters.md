@@ -36,7 +36,7 @@ export default class CustomReporter extends BaseReporter {
 或者实现 `Reporter` 接口：
 
 ```ts [custom-reporter.js]
-import { Reporter } from 'vitest/reporters'
+import type { Reporter } from 'vitest/node'
 
 export default class CustomReporter implements Reporter {
   onCollected() {
@@ -65,10 +65,14 @@ export default defineConfig({
 你可以通过调用 `vitest.state.getReportedEntity(runnerTask)` 访问此 API：
 
 ```ts twoslash
+<<<<<<< HEAD
 // @noErrors
 import type { Vitest } from 'vitest/node'
 import type { RunnerTestFile } from 'vitest'
 import type { Reporter, TestModule } from 'vitest/reporters'
+=======
+import type { Reporter, RunnerTestFile, TestModule, Vitest } from 'vitest/node'
+>>>>>>> dc3f007c37a718074d6b3b367159c7a198c04c0d
 
 class MyReporter implements Reporter {
   private vitest!: Vitest

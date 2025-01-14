@@ -13,6 +13,10 @@ const specification = project.createSpecification(
 
 `createSpecification` 期望一个已解析的模块 ID。它不会自动解析文件或检查文件是否存在于文件系统中。
 
+## taskId
+
+[Test module's](/advanced/api/test-suite#id) identifier.
+
 ## project
 
 这引用了测试模块所属的 [`TestProject`](/advanced/api/test-project)。
@@ -26,6 +30,10 @@ Vite 模块图中的模块 ID。通常，它是一个使用 POSIX 分隔符的�
 '/Users/mac/project/example.test.ts' // ✅
 'C:\\Users\\Documents\\project\\example.test.ts' // ❌
 ```
+
+## testModule
+
+Instance of [`TestModule`](/advanced/api/test-module) assosiated with the specification. If test wasn't queued yet, this will be `undefined`.
 
 ## pool <Badge type="warning">experimental</Badge> {#pool}
 
