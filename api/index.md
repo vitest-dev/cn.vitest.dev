@@ -1009,7 +1009,16 @@ describe.todo('unimplemented suite')
 
 - **类型:** `(cases: ReadonlyArray<T>, ...args: any[]): (name: string | Function, fn: (...args: T[]) => void, options?: number | TestOptions) => void`
 
+<<<<<<< HEAD
 如果有多个测试依赖于相同的数据，请使用 `describe.each` 。
+=======
+::: tip
+While `describe.each` is provided for Jest compatibility,
+Vitest also has [`describe.for`](#describe-for) which simplifies argument types and aligns with [`test.for`](#test-for).
+:::
+
+Use `describe.each` if you have more than one test that depends on the same data.
+>>>>>>> 372aba690a16e2350815f06f4a4052c18fad4941
 
 ```ts
 import { describe, expect, test } from 'vitest'
@@ -1058,6 +1067,37 @@ describe.each`
 ::: warning
 在将 Vitest 用作[类型检查器](/guide/testing-types)时，不能使用此语法。
 :::
+
+### describe.for
+
+- **Alias:** `suite.for`
+
+The difference from `describe.each` is how array case is provided in the arguments.
+Other non array case (including template string usage) works exactly same.
+
+```ts
+// `each` spreads array case
+describe.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('add(%i, %i) -> %i', (a, b, expected) => { // [!code --]
+  test('test', () => {
+    expect(a + b).toBe(expected)
+  })
+})
+
+// `for` doesn't spread array case
+describe.for([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('add(%i, %i) -> %i', ([a, b, expected]) => { // [!code ++]
+  test('test', () => {
+    expect(a + b).toBe(expected)
+  })
+})
+```
 
 ## Setup and Teardown
 
@@ -1237,7 +1277,21 @@ test('performs an organization query', async () => {
 ```
 
 ::: tip
+<<<<<<< HEAD
 该钩子总是以相反顺序调用，不受 [`sequence.hooks`](/config/#sequence-hooks) 选项的影响。
+=======
+This hook is always called in reverse order and is not affected by [`sequence.hooks`](/config/#sequence-hooks) option.
+
+<!-- TODO: should it be called? https://github.com/vitest-dev/vitest/pull/7069 -->
+Note that this hook is not called if test was skipped with a dynamic `ctx.skip()` call:
+
+```ts{2}
+test('skipped dynamically', (t) => {
+  onTestFinished(() => {}) // not called
+  t.skip()
+})
+```
+>>>>>>> 372aba690a16e2350815f06f4a4052c18fad4941
 :::
 
 ### onTestFailed

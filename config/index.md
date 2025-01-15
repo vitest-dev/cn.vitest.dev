@@ -1357,7 +1357,12 @@ export default defineConfig({
 ```
 
 ::: tip NOTE
+<<<<<<< HEAD
 Vitest 会自动将测试文件的 `include` 模式添加到 `coverage.exclude` 的默认值中。
+=======
+Vitest automatically adds test files `include` patterns to the `coverage.exclude`.
+It's not possible to show coverage of test files.
+>>>>>>> 372aba690a16e2350815f06f4a4052c18fad4941
 :::
 
 #### coverage.all

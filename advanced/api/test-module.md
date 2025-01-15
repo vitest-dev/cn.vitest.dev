@@ -10,6 +10,7 @@ if (task.type === 'module') {
 }
 ```
 
+<<<<<<< HEAD
 `TestModule` 继承了 [`TestSuite`](/advanced/api/test-suite) 的所有方法和属性。本指南将仅列出 `TestModule` 独有的方法和属性。
 
 ::: warning
@@ -33,11 +34,29 @@ class Reporter {
   }
 }
 ```
+=======
+::: warning Extending Suite Methods
+The `TestModule` class inherits all methods and properties from the [`TestSuite`](/advanced/api/test-suite). This guide will only list methods and properties unique to the `TestModule`.
+>>>>>>> 372aba690a16e2350815f06f4a4052c18fad4941
 :::
 
 ## moduleId
 
 这通常是一个绝对的 Unix 文件路径（即使在 Windows 上也是如此）。如果文件不在磁盘上，它可以是一个虚拟 ID。此值对应于 Vite 的 `ModuleGraph` ID。
+
+```ts
+'C:/Users/Documents/project/example.test.ts' // ✅
+'/Users/mac/project/example.test.ts' // ✅
+'C:\\Users\\Documents\\project\\example.test.ts' // ❌
+```
+
+## state
+
+```ts
+function state(): TestModuleState
+```
+
+Works the same way as [`testSuite.state()`](/advanced/api/test-suite#state), but can also return `queued` if module wasn't executed yet.
 
 ## diagnostic
 
@@ -52,23 +71,23 @@ interface ModuleDiagnostic {
   /**
    * The time it takes to import and initiate an environment.
    */
-  environmentSetupDuration: number
+  readonly environmentSetupDuration: number
   /**
    * The time it takes Vitest to setup test harness (runner, mocks, etc.).
    */
-  prepareDuration: number
+  readonly prepareDuration: number
   /**
    * The time it takes to import the test module.
    * This includes importing everything in the module and executing suite callbacks.
    */
-  collectDuration: number
+  readonly collectDuration: number
   /**
    * The time it takes to import the setup module.
    */
-  setupDuration: number
+  readonly setupDuration: number
   /**
    * Accumulated duration of all tests and hooks in the module.
    */
-  duration: number
+  readonly duration: number
 }
 ```
