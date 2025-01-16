@@ -178,6 +178,7 @@ Vitest 支持模拟 Vite [虚拟模块](https://cn.vitejs.dev/guide/api-plugin#v
 
 ```ts [vitest.config.js]
 import { defineConfig } from 'vitest/config'
+import { resolve } from 'node:path'
 export default defineConfig({
   test: {
     alias: {
@@ -385,7 +386,7 @@ module.exports = fs.promises
 import { readFileSync } from 'node:fs'
 
 export function readHelloWorld(path) {
-  return readFileSync(path)
+  return readFileSync(path, 'utf-8')
 }
 ```
 

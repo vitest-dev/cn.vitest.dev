@@ -57,16 +57,14 @@ for (const suite of module.children.allSuites()) {
 ## allTests
 
 ```ts
-function allTests(
-  state?: TestResult['state'] | 'running'
-): Generator<TestCase, undefined, void>
+function allTests(state?: TestState): Generator<TestCase, undefined, void>
 ```
 
 过滤出属于此集合及其子集的所有测试。
 
 ```ts
 for (const test of module.children.allTests()) {
-  if (!test.result()) {
+  if (test.result().state === 'pending') {
     console.log('test', test.fullName, 'did not finish')
   }
 }
@@ -77,9 +75,7 @@ for (const test of module.children.allTests()) {
 ## tests
 
 ```ts
-function tests(
-  state?: TestResult['state'] | 'running'
-): Generator<TestCase, undefined, void>
+function tests(state?: TestState): Generator<TestCase, undefined, void>
 ```
 
 仅过滤属于此集合的测试。你可以传递一个 `state` 值来根据状态过滤测试。

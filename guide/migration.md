@@ -54,6 +54,81 @@ export default defineConfig({
 
 使用新的 `browser.instances` 字段，我们还可以指定多个浏览器配置。
 
+### `spy.mockReset` Now Restores the Original Implementation
+
+There was no good way to reset the spy to the original implementation without reaplying the spy. Now, `spy.mockReset` will reset the implementation function to the original one instead of a fake noop.
+
+```ts
+const foo = {
+  bar: () => 'Hello, world!'
+}
+
+vi.spyOn(foo, 'bar').mockImplementation(() => 'Hello, mock!')
+
+foo.bar() // 'Hello, mock!'
+
+foo.bar.mockReset()
+
+foo.bar() // undefined // [!code --]
+foo.bar() // 'Hello, world!' // [!code ++]
+```
+
+### `vi.spyOn` Reuses Mock if Method is Already Mocked
+
+Previously, Vitest would always assign a new spy when spying on an object. This caused errors with `mockRestore` because it would restore the spy to the previous spy instead of the original function:
+
+```ts
+vi.spyOn(fooService, 'foo').mockImplementation(() => 'bar')
+vi.spyOn(fooService, 'foo').mockImplementation(() => 'bar')
+vi.restoreAllMocks()
+vi.isMockFunction(fooService.foo) // true // [!code --]
+vi.isMockFunction(fooService.foo) // false // [!code ++]
+```
+
+### Fake Timers Defaults
+
+Vitest no longer provides default `fakeTimers.toFake` options. Now, Vitest will mock any timer-related API if it is available (except `nextTick`). Namely, `performance.now()` is now mocked when `vi.useFakeTimers` is called.
+
+```ts
+vi.useFakeTimers()
+
+performance.now() // original // [!code --]
+performance.now() // fake // [!code ++]
+```
+
+You can revert to the previous behaviour by specifying timers when calling `vi.useFakeTimers` or globally in the config:
+
+```ts
+export default defineConfig({
+  test: {
+    fakeTimers: {
+      toFake: ['setTimeout', 'clearTimeout', 'Date'], // [!code ++]
+    },
+  },
+})
+```
+
+### More Strict Error Equality
+
+Vitest now checks more properties when comparing errors via `toEqual` or `toThrowError`. Vitest now compares `name`, `message`, `cause` and `AggregateError.errors`. For `Error.cause`, the comparison is done asymmetrically:
+
+```ts
+expect(new Error('hi', { cause: 'x' })).toEqual(new Error('hi')) // ✅
+expect(new Error('hi')).toEqual(new Error('hi', { cause: 'x' })) // ❌
+```
+
+In addition to more properties check, Vitest now compares error prototypes. For example, if `TypeError` was thrown, the equality check should reference `TypeError`, not `Error`:
+
+```ts
+expect(() => {
+  throw new TypeError('type error')
+})
+  .toThrowError(new Error('type error')) // [!code --]
+  .toThrowError(new TypeError('type error')) // [!code ++]
+```
+
+See PR for more details: [#5876](https://github.com/vitest-dev/vitest/pull/5876).
+
 ### `Custom` Type is Deprecated <Badge type="danger">API</Badge> {#custom-type-is-deprecated}
 
 `Custom` 类型现在等同于 `Test` 类型。需要注意一下，Vitest 在 2.1 版本中更新了公共类型，并将导出的名称更改为 `RunnerCustomCase` 和 `RunnerTestCase`。
@@ -75,11 +150,25 @@ import {
 
 [`onTestFinished`](/api/#ontestfinished) 和 [`onTestFailed`](/api/#ontestfailed) 钩子之前接收测试结果作为第一个参数。现在，它们像 `beforeEach` 和 `afterEach` 一样，接收一个测试上下文。
 
+### Changes to the Snapshot API <Badge type="danger">API</Badge> {#changes-to-the-snapshot-api}
+
+The public Snapshot API in `@vitest/snapshot` was changed to support multiple states within a single run. See PR for more details: [#6817](https://github.com/vitest-dev/vitest/pull/6817)
+
+Note that this changes only affect developers using the Snapshot API directly. There were no changes to `.toMatchSnapshot` API.
+
 ### Changes to `resolveConfig` Type Signature <Badge type="danger">API</Badge> {#changes-to-resolveconfig-type-signature}
 
 [`resolveConfig`](/advanced/api/#resolveconfig) 现在更加有用。它不再接受已经解析的 Vite 配置，而是接受用户配置并返回解析后的配置。
 
 此函数不用于内部，仅作为公共 API 暴露。
+
+### Cleaned up `vitest/reporters` types <Badge type="danger">API</Badge> {#cleaned-up-vitest-reporters-types}
+
+The `vitest/reporters` entrypoint now only exports reporters implementations and options types. If you need access to `TestCase`/`TestSuite` and other task related types, import them additionally from `vitest/node`.
+
+### Coverage ignores test files even when `coverage.excludes` is overwritten.
+
+It is no longer possible to include test files in coverage report by overwriting `coverage.excludes`. Test files are now always excluded.
 
 ## Migrating to Vitest 2.0 {#vitest-2}
 
