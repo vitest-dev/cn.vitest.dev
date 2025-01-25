@@ -17,30 +17,17 @@
     "generate-pwa-icons": "pwa-assets-generator"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@vueuse/core": "^12.4.0",
-    "vue": "^3.5.13"
-=======
     "@vueuse/core": "^12.5.0",
     "vue": "^3.5.12"
->>>>>>> f36a6b96e4bc763d9053881798064c0959f3cba0
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.14.0",
     "@antfu/ni": "^23.2.0",
     "@iconify-json/carbon": "^1.2.5",
     "@iconify-json/logos": "^1.2.4",
-<<<<<<< HEAD
-    "@shikijs/transformers": "^1.27.2",
-    "@shikijs/vitepress-twoslash": "^1.27.2",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.10.7",
-    "@unocss/reset": "^65.4.2",
-=======
     "@shikijs/transformers": "^1.29.1",
     "@shikijs/vitepress-twoslash": "^1.29.1",
     "@unocss/reset": "^0.65.4",
->>>>>>> f36a6b96e4bc763d9053881798064c0959f3cba0
     "@vite-pwa/assets-generator": "^0.2.6",
     "@vite-pwa/vitepress": "^0.5.3",
     "@vitejs/plugin-vue": "^5.2.1",
