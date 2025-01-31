@@ -403,8 +403,13 @@ expect(getApples).toHaveNthReturnedWith(2, 5)
 
 ### vi.restoreAllMocks
 
+<<<<<<< HEAD
 对所有 spies 调用 [`.mockRestore()`](/api/mock#mockrestore)。
 这将清除模拟的历史记录，恢复所有原始模拟实现，并恢复被监视对象的原始描述符。
+=======
+Calls [`.mockRestore()`](/api/mock#mockrestore) on all spies.
+This will clear mock history, restore all original mock implementations, and restore original descriptors of spied-on objects.
+>>>>>>> d748e7fd543fe6660361e07a0bbba36aec3e7bf1
 
 ### vi.spyOn
 
